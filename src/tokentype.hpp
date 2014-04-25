@@ -5,7 +5,7 @@ namespace tokentype {
 	/**
 	 * Definition of All Token-types
 	 */
-	enum Types {
+	typedef enum {
 		T_UNDEFINED  = -1,
 		T_EOF        =  0,
 		T_IDENTIFIER =  1,
@@ -18,5 +18,5 @@ namespace tokentype {
 		T_INST_MINUS,
 		T_INST_MUL,
 		T_INST_DIV,
-	};
+	} Type;
 } // namespace tokentype

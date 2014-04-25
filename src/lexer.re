@@ -18,9 +18,9 @@ namespace lexer {
 	/**
 	 * Get current Token-type
 	 *
-	 * @return tokentype::Types
+	 * @return tokentype::Type
 	 */
-	enum tokentype::Types Scanner::current_tokentype() const {
+	tokentype::Type Scanner::current_tokentype() const {
 		return type;
 	}
 

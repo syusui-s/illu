@@ -13,7 +13,7 @@ namespace lexer {
 	{
 		private:
 			std::string input;
-			enum tokentype::Types type;
+			tokentype::Type type;
 			char *input_cstr;
 			char *marker;
 			char *cursor;
@@ -33,7 +33,7 @@ namespace lexer {
 			void reset();
 			bool read_next();
 			std::string current_lexeme();
-			enum tokentype::Types current_tokentype() const;
+			tokentype::Type current_tokentype() const;
 	};
 
 	//enum Types scan(char *input);
