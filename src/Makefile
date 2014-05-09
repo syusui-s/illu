@@ -1,5 +1,5 @@
 PROGRAM := rpn
-SRCS := model.cpp lexer.cpp main.cpp
+SRCS := model.cpp scanner.cpp main.cpp
 OBJS := $(subst .cpp,.o,$(SRCS))
 
 CXX := clang++
@@ -14,12 +14,12 @@ all: $(PROGRAM)
 $(PROGRAM): $(OBJS)
 	$(CXX) $(OBJS) -o $(PROGRAM)
 
-lexer.o: lexer.cpp
-lexer.cpp: lexer.re
+scanner.o: scanner.cpp
+scanner.cpp: scanner.re
 	$(RE2C) -o $@ $<
 
 clean:
-	$(RM) $(OBJS) $(PROGRAM)
+	$(RM) $(OBJS)  scanner.cpp $(PROGRAM)
 
 clean-without-program:
-	$(RM) $(OBJS) lexer.cpp
+	$(RM) $(OBJS) scanner.cpp

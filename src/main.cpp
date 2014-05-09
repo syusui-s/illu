@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "model.hpp"
-#include "lexer.hpp"
+#include "scanner.hpp"
 
 int main()
 {

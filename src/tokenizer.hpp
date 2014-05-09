@@ -3,39 +3,10 @@
 #include <string>
 
 #include "tokentype.hpp"
+#include "scanner.hpp"
 #include "model.hpp"
 
 namespace lexer {
-	/**
-	 * Scanner Class
-	 */
-	class Scanner
-	{
-		private:
-			std::string input;
-			tokentype::Type type;
-			char *input_cstr;
-			char *marker;
-			char *cursor;
-			char *token_first;
-		public:
-			/**
-			 * constructor
-			 */
-			Scanner(const std::string& _input) :
-				input(_input),
-				type(tokentype::T_UNDEFINED),
-				input_cstr(const_cast<char*>(_input.c_str())),
-				cursor(input_cstr),
-				token_first(NULL)
-				{}
-			~Scanner() { }
-			void reset();
-			bool read_next();
-			std::string current_lexeme();
-			tokentype::Type current_tokentype() const;
-	};
-
 	/**
 	 * Token Class
 	 * representation of Token
@@ -73,4 +44,5 @@ namespace lexer {
 			Token current_token();
 			TokenVector tokenize();
 	};
-} // parser
+
+} // lexer

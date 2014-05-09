@@ -1,5 +1,5 @@
 /* vim: set filetype=cpp : */
-#include "lexer.hpp"
+#include "scanner.hpp"
 
 /**
  * namespace lexer
