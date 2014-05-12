@@ -1,5 +1,5 @@
 PROGRAM := rpn
-SRCS := model.cpp scanner.cpp main.cpp
+SRCS := model.cpp scanner.cpp tokenizer.cpp main.cpp
 OBJS := $(subst .cpp,.o,$(SRCS))
 
 CXX := clang++

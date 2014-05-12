@@ -19,7 +19,7 @@ namespace lexer {
 
 			Token(const std::string &_lexeme, const tokentype::Type _type) :
 				lexeme(_lexeme), type(_type) {}
-			model::Element to_element();
+			model::Element* to_element();
 	};
 
 	/**
@@ -38,8 +38,11 @@ namespace lexer {
 	{
 		private:
 			std::string input;
+			Scanner *scanner;
 		public:
-			Tokenizer(const std::string &_input) : input(_input) {}
+			Tokenizer(const std::string &_input) : input(_input) {
+				this->scanner = new Scanner(input);
+			}
 			bool read_next();
 			Token current_token();
 			TokenVector tokenize();

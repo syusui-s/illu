@@ -2,6 +2,7 @@
 
 #include "model.hpp"
 #include "scanner.hpp"
+#include "tokenizer.hpp"
 
 int main()
 {
@@ -55,6 +56,8 @@ int main()
 	//
 	
 	// Lexer
+	lexer::Tokenizer tokenizer("3 4");
+	model::Stack stack3 = tokenizer.tokenize().to_stack();
 	
 
 	return 0;
