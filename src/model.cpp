@@ -42,7 +42,6 @@ namespace model {
 
 	//////////////////////////
 	// Float
-
 	/**
 	 * applicate addition
 	 */

@@ -71,7 +71,9 @@ namespace model {
 			TYPE data;
 		public:
 			Integer(const TYPE _data) : data(_data) {};
-
+			Integer(const std::string _data, int base) :
+				data(std::stoi(_data, 0, base))
+			{}
 			// Instance Methods
 			
 			/**
@@ -97,6 +99,9 @@ namespace model {
 			TYPE data;
 		public:
 			Float(const TYPE _data) : data(_data) {};
+			Float(const std::string &_data) :
+				data(std::stod(_data, 0))
+			{};
 
 			// Instance Methods
 			inline TYPE get_data() { return data; }

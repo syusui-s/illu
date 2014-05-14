@@ -55,10 +55,12 @@ int main()
 	// std::cout << stack.at(-1) << std::endl;
 	//
 	
-	// Lexer
+	// Lexer testing
 	lexer::Tokenizer tokenizer("3 4");
 	model::Stack stack3 = tokenizer.tokenize().to_stack();
-	
+	for (auto& it : stack3) {
+		std::cout << it->to_string() << std::endl;
+	}
 
 	return 0;
 }

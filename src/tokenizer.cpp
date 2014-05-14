@@ -14,9 +14,9 @@ namespace lexer {
 
 		switch (this->type) {
 			case T_INTEGER:
-				return new model::Integer(0);
+				return new model::Integer(lexeme, 10);
 			case T_FLOAT:
-				return new model::Float(0);
+				return new model::Float(lexeme);
 			default:
 				throw "TokenConvertionError";
 		}
