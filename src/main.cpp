@@ -72,5 +72,35 @@ int main()
 
 	std::cout << "stack4: " << stack4.to_string() << std::endl;
 
+	// application
+	std::string input;
+	model::Stack stack5;
+	lexer::TokenVector tokvec;
+
+	while (true) {
+		std::cout << std::endl << "Input> ";
+		std::getline(std::cin, input);
+
+		lexer::Tokenizer* p_tokenizer = new lexer::Tokenizer(input);
+		tokvec = p_tokenizer->tokenize();
+
+		for (auto& tok : tokvec) {
+			if (tok.type == tokentype::T_INST_PLUS) {
+				if (stack5.size() > 1) {
+					tok.to_element()->cast<model::Instruction>()->applicate(stack5);
+				} else {
+					std::cout << "Cannot Applicate Instruction" << std::endl;
+				}
+			} else if (tok.type == tokentype::T_INTEGER || tok.type == tokentype::T_FLOAT) {
+				stack5.push(tok.to_element());
+			} else {
+				std::cout << "Unknown TokenType" << std::endl;
+			}
+		}
+		delete p_tokenizer;
+
+		std::cout << "Data Stack: " << stack5.to_string() << std::endl;
+	}
+
 	return 0;
 }
