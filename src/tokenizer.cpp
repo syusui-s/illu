@@ -13,10 +13,14 @@ namespace lexer {
 		using namespace tokentype;
 
 		switch (this->type) {
+			// Data Types
 			case T_INTEGER:
 				return new model::Integer(lexeme, 10);
 			case T_FLOAT:
 				return new model::Float(lexeme);
+			// Instructions
+			case T_INST_PLUS:
+				return new model::Instruction(model::Instruction::INST_PLUS);
 			default:
 				throw "TokenConvertionError";
 		}

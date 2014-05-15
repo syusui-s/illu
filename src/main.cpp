@@ -58,9 +58,19 @@ int main()
 	// Lexer testing
 	lexer::Tokenizer tokenizer("3 4");
 	model::Stack stack3 = tokenizer.tokenize().to_stack();
-	for (auto& it : stack3) {
-		std::cout << it->to_string() << std::endl;
+	std::cout << "stack3: " << stack3.to_string() << std::endl;
+
+	// applicate check
+	lexer::Tokenizer tokenizer2("1 2 3 4 5 6 7 8 9 10");
+	model::Stack stack4 = tokenizer2.tokenize().to_stack();
+
+	std::cout << "stack4: " << stack4.to_string() << std::endl;
+
+	while (stack4.size() > 1) {
+		model::Instruction(model::Instruction::INST_PLUS).applicate(stack4);
 	}
+
+	std::cout << "stack4: " << stack4.to_string() << std::endl;
 
 	return 0;
 }

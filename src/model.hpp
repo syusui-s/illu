@@ -151,13 +151,12 @@ namespace model {
 				INST_POP, INST_DROP, INST_ROLL, INST_SWAP,
 			};
 		private:
-			Instructions data;
+			const Instructions data;
 		public:
 			Instruction(const Instructions _data) : data(_data) {}
-			std::string to_string() const { return ""; }
+			std::string to_string() const { return ""; } // TODO implementation
 
 			Stack& applicate(Stack& stack);
 			Stack& plus(Stack& stack);
 	};
-
 }
