@@ -57,6 +57,7 @@ namespace model {
 	class Numeric : public Element
 	{
 		public:
+			virtual ~Numeric() {}
 	};
 
 	/**
@@ -74,6 +75,7 @@ namespace model {
 			Integer(const std::string _data, int base) :
 				data(std::stoi(_data, 0, base))
 			{}
+			virtual ~Integer() {}
 			// Instance Methods
 			
 			/**
@@ -102,6 +104,7 @@ namespace model {
 			Float(const std::string &_data) :
 				data(std::stod(_data, 0))
 			{};
+			virtual ~Float() {}
 
 			// Instance Methods
 			inline TYPE get_data() { return data; }
@@ -121,6 +124,7 @@ namespace model {
 	{
 		public:
 			Nil() {};
+			virtual ~Nil() {};
 
 			// Instance Methods
 			virtual std::string to_string() const;
@@ -154,6 +158,8 @@ namespace model {
 			const Instructions data;
 		public:
 			Instruction(const Instructions _data) : data(_data) {}
+			virtual ~Instruction() {}
+
 			std::string to_string() const { return ""; } // TODO implementation
 
 			Stack& applicate(Stack& stack);
