@@ -49,9 +49,9 @@ namespace model {
 		Element* rtn;
 
 		if (other->instance_of<Float>()) {
-			rtn = new Integer( data + other->cast<Integer>()->get_data() );
+			rtn = new Float( data + other->cast<Float>()->get_data() );
 		} else if (other->instance_of<Integer>()) {
-			rtn = new Float( data + (Float::TYPE)other->cast<Integer>()->get_data() );
+			rtn = new Float( data + other->cast<Integer>()->get_data() );
 		// } else if (other.instance_of<>)
 		} else {
 			throw "UnexpectedTypeError";
