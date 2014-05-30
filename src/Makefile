@@ -4,7 +4,7 @@ OBJS := $(subst .cpp,.o,$(SRCS))
 
 CXX := clang++
 
-CXXFLAGS := -Wall -W -O2 -std=c++11
+CXXFLAGS := -Wall -Werror -O2 -std=c++11
 #INCLUDES := include/
 RE2C := re2c
 #LIBS := ""
