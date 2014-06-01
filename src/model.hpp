@@ -71,7 +71,7 @@ namespace model {
 		private:
 			TYPE data;
 		public:
-			Integer(const TYPE _data) : data(_data) {};
+			Integer(const TYPE _data) : data(_data) {}
 			Integer(const std::string _data, int base) :
 				data(std::stoi(_data, 0, base))
 			{}
@@ -85,7 +85,6 @@ namespace model {
 			virtual std::string to_string() const;
 
 			// Operators
-
 			Element* add(Element *other);
 	};
 
@@ -100,10 +99,10 @@ namespace model {
 		private:
 			TYPE data;
 		public:
-			Float(const TYPE _data) : data(_data) {};
+			Float(const TYPE _data) : data(_data) {}
 			Float(const std::string &_data) :
 				data(std::stod(_data, 0))
-			{};
+			{}
 			virtual ~Float() {}
 
 			// Instance Methods
@@ -111,9 +110,26 @@ namespace model {
 			virtual std::string to_string() const;
 
 			// Operators
-
 			Element* add(Element *other);
 	};
+
+	/**
+	 * String data
+	 *
+	 * representation of string data
+	 */
+	class String : public Element
+	{
+		private:
+			const std::string data;
+		public:
+			String(const std::string &_data) : data(_data) {}
+
+			// Instance Methods
+			virtual std::string to_string() const;
+			inline std::string get_data() { return data; }
+	};
+
 
 	/**
 	 * Nil data

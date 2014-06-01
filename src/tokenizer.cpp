@@ -18,6 +18,8 @@ namespace lexer {
 				return new model::Integer(lexeme, 10);
 			case T_FLOAT:
 				return new model::Float(lexeme);
+			case T_STRING:
+				return new model::String(lexeme);
 			// Instructions
 			case T_INST_PLUS:
 				return new model::Instruction(model::Instruction::INST_PLUS);

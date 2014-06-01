@@ -91,7 +91,7 @@ int main()
 				} else {
 					std::cout << "Cannot Applicate Instruction" << std::endl;
 				}
-			} else if (tok.type == tokentype::T_INTEGER || tok.type == tokentype::T_FLOAT) {
+			} else if (tok.type == tokentype::T_INTEGER || tok.type == tokentype::T_FLOAT || tok.type == tokentype::T_STRING) {
 				stack5.push(tok.to_element());
 			} else {
 				std::cout << "Unknown TokenType" << std::endl;

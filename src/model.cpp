@@ -70,6 +70,11 @@ namespace model {
 
 		return ss.str();
 	}
+	//////////////////////////
+	// Nil
+	std::string String::to_string() const {
+		return this->data;
+	}
 
 	//////////////////////////
 	// Nil
