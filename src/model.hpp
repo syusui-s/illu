@@ -86,6 +86,7 @@ namespace model {
 
 			// Operators
 			Element* add(Element *other);
+			Element* sub(Element *other);
 	};
 
 	/**
@@ -111,6 +112,7 @@ namespace model {
 
 			// Operators
 			Element* add(Element *other);
+			Element* sub(Element *other);
 	};
 
 	/**
@@ -180,5 +182,6 @@ namespace model {
 
 			Stack& applicate(Stack& stack);
 			Stack& plus(Stack& stack);
+			Stack& sub(Stack& stack);
 	};
 }

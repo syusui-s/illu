@@ -85,7 +85,7 @@ int main()
 		tokvec = p_tokenizer->tokenize();
 
 		for (auto& tok : tokvec) {
-			if (tok.type == tokentype::T_INST_PLUS) {
+			if (tok.type == tokentype::T_INST_PLUS || tok.type == tokentype::T_INST_MINUS) {
 				if (stack5.size() > 1) {
 					tok.to_element()->cast<model::Instruction>()->applicate(stack5);
 				} else {

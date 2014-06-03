@@ -40,10 +40,41 @@ namespace model {
 		return rtn;
 	}
 
+	/**
+	 * Sub this data and other data
+	 *
+	 * @return std::string
+	 */
+	Element* Integer::sub(Element *other) {
+		Element* rtn;
+
+		if (other->instance_of<Integer>()) {
+			rtn = new Integer( data - other->cast<Integer>()->get_data() );
+		} else if (other->instance_of<Float>()) {
+			rtn = new Float(static_cast<Float::TYPE>(data) - other->cast<Float>()->get_data() );
+		// } else if (other.instance_of<>) {
+		} else {
+			throw "UnexpectedTypeError";
+		}
+
+		return rtn;
+	}
+
 	//////////////////////////
 	// Float
+
 	/**
-	 * applicate addition
+	 * Convert Float to String
+	 */
+	std::string Float::to_string() const
+	{
+		std::stringstream ss;
+		ss << this->data;
+
+		return ss.str();
+	}
+	/**
+	 * Sub this data and other data
 	 */
 	Element* Float::add(Element *other) {
 		Element* rtn;
@@ -61,15 +92,23 @@ namespace model {
 	}
 
 	/**
-	 * Convert Float to String
+	 * applicate subtruction
 	 */
-	std::string Float::to_string() const
-	{
-		std::stringstream ss;
-		ss << this->data;
+	Element* Float::sub(Element *other) {
+		Element* rtn;
 
-		return ss.str();
+		if (other->instance_of<Float>()) {
+			rtn = new Float( data - other->cast<Float>()->get_data() );
+		} else if (other->instance_of<Integer>()) {
+			rtn = new Float( data - other->cast<Integer>()->get_data() );
+		// } else if (other.instance_of<>)
+		} else {
+			throw "UnexpectedTypeError";
+		}
+
+		return rtn;
 	}
+
 	//////////////////////////
 	// Nil
 	std::string String::to_string() const {
@@ -93,6 +132,9 @@ namespace model {
 			case INST_PLUS:
 				plus(stack);
 				break;
+			case INST_MINUS:
+				sub(stack);
+				break;
 			default:
 				throw "No such a instruction";
 		}
@@ -102,13 +144,14 @@ namespace model {
 	/**
 	 * applicate addition
 	 *
+	 * @param  Stack& stack which will be applicated
 	 * @return Stack&
 	 */
 	Stack& Instruction::plus(Stack& stack) {
 		Element *arg1, *arg2, *result;
 		
-		arg1 = stack.pop();
 		arg2 = stack.pop();
+		arg1 = stack.pop();
 		result = NULL;
 
 		if (arg1->instance_of<Integer>()) {
@@ -116,7 +159,36 @@ namespace model {
 		} else if (arg1->instance_of<Float>()) {
 			result = arg1->cast<Float>()->add(arg2);
 		}
+
 		stack.push(result);
+
+		delete arg1;
+		delete arg2;
+
+		return stack;
+	}
+
+	/**
+	 * applicate substruction
+	 *
+	 * @param  Stack& stack which will be applicated
+	 * @return Stack&
+	 */
+	Stack& Instruction::sub(Stack& stack) {
+		Element *arg1, *arg2, *result;
+		
+		arg2 = stack.pop();
+		arg1 = stack.pop();
+		result = NULL;
+
+		if (arg1->instance_of<Integer>()) {
+			result = arg1->cast<Integer>()->sub(arg2);
+		} else if (arg1->instance_of<Float>()) {
+			result = arg1->cast<Float>()->sub(arg2);
+		}
+
+		stack.push(result);
+
 		delete arg1;
 		delete arg2;
 
