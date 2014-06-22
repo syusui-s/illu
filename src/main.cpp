@@ -88,6 +88,7 @@ int main()
 			if (tok.type == tokentype::T_INST_PLUS
 				|| tok.type == tokentype::T_INST_MINUS
 				|| tok.type == tokentype::T_INST_MULTIPLICATION
+				|| tok.type == tokentype::T_INST_DIVISION
 				) {
 				if (stack5.size() > 1) {
 					tok.to_element()->cast<model::Instruction>()->applicate(stack5);

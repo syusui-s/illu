@@ -89,6 +89,7 @@ namespace model {
 			Element* add(Element *other);
 			Element* sub(Element *other);
 			Element* mul(Element *other);
+			Element* div(Element *other);
 	};
 
 	/**
@@ -116,6 +117,7 @@ namespace model {
 			Element* add(Element *other);
 			Element* sub(Element *other);
 			Element* mul(Element *other);
+			Element* div(Element *other);
 	};
 
 	/**
@@ -187,5 +189,6 @@ namespace model {
 			Stack& add(Stack& stack);
 			Stack& sub(Stack& stack);
 			Stack& mul(Stack& stack);
+			Stack& div(Stack& stack);
 	};
 }
