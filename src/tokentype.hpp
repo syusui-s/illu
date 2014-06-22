@@ -16,7 +16,7 @@ namespace tokentype {
 		// Instructions
 		T_INST_PLUS,
 		T_INST_MINUS,
-		T_INST_MUL,
-		T_INST_DIV,
+		T_INST_MULTIPLICATION,
+		T_INST_DIVISION,
 	} Type;
 } // namespace tokentype

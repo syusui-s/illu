@@ -41,7 +41,7 @@ namespace lexer {
 
 				IDENTIFIER = [a-zA-Z_][a-zA-Z_0-9]*;
 				INTEGER    = [+-]?[0-9]+;
-				FLOAT      = [+-]?[1-9][0-9]*"."[0-9]+;
+				FLOAT      = [+-]?[0-9]+"."[0-9]+;
 				STRING     = "'".*"'";
 				NULL       = "\000";
 
@@ -53,8 +53,8 @@ namespace lexer {
 				FLOAT		{ type = tokentype::T_FLOAT; return true; }
 				"+"			{ type = tokentype::T_INST_PLUS; return true; }
 				"-"			{ type = tokentype::T_INST_MINUS; return true; }
-				"*"			{ type = tokentype::T_INST_MUL; return true; }
-				"/"			{ type = tokentype::T_INST_DIV; return true; }
+				"*"			{ type = tokentype::T_INST_MULTIPLICATION; return true; }
+				"/"			{ type = tokentype::T_INST_DIVISION; return true; }
 				[^]			{ type = tokentype::T_UNDEFINED; return true; }
 			 */
 		}

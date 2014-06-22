@@ -88,6 +88,7 @@ namespace model {
 			// Operators
 			Element* add(Element *other);
 			Element* sub(Element *other);
+			Element* mul(Element *other);
 	};
 
 	/**
@@ -114,6 +115,7 @@ namespace model {
 			// Operators
 			Element* add(Element *other);
 			Element* sub(Element *other);
+			Element* mul(Element *other);
 	};
 
 	/**
@@ -159,7 +161,7 @@ namespace model {
 			 */
 			enum Instructions {
 				// basic arithmetic operators
-				INST_PLUS, INST_MINUS, INST_MULTIPLY, INST_DIV,
+				INST_PLUS, INST_MINUS, INST_MULTIPLICATION, INST_DIVISION,
 				// monadic operators
 				INST_ABSOLUTE, INST_SIGN_INVERSE, INST_INVERSE,
 				// exponential function
@@ -182,7 +184,8 @@ namespace model {
 			std::string to_string() const { return ""; } // TODO implementation
 
 			Stack& applicate(Stack& stack);
-			Stack& plus(Stack& stack);
+			Stack& add(Stack& stack);
 			Stack& sub(Stack& stack);
+			Stack& mul(Stack& stack);
 	};
 }

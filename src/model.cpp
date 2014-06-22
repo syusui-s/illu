@@ -60,6 +60,24 @@ namespace model {
 		return rtn;
 	}
 
+	/**
+	 * applicate mutliplication
+	 */
+	Element* Integer::mul(Element *other) {
+		Element* rtn;
+
+		if (other->instance_of<Integer>()) {
+			rtn = new Integer( data * other->cast<Integer>()->get_data() );
+		} else if (other->instance_of<Float>()) {
+			rtn = new Float( data * other->cast<Float>()->get_data() );
+		// } else if (other.instance_of<>)
+		} else {
+			throw "UnexpectedTypeError";
+		}
+
+		return rtn;
+	}
+
 	//////////////////////////
 	// Float
 
@@ -108,6 +126,24 @@ namespace model {
 		return rtn;
 	}
 
+	/**
+	 * applicate mutliplication
+	 */
+	Element* Float::mul(Element *other) {
+		Element* rtn;
+
+		if (other->instance_of<Float>()) {
+			rtn = new Float( data * other->cast<Float>()->get_data() );
+		} else if (other->instance_of<Integer>()) {
+			rtn = new Float( data * other->cast<Integer>()->get_data() );
+		// } else if (other.instance_of<>)
+		} else {
+			throw "UnexpectedTypeError";
+		}
+
+		return rtn;
+	}
+
 	//////////////////////////
 	// String
 	std::string String::to_string() const {
@@ -129,10 +165,13 @@ namespace model {
 	Stack& Instruction::applicate(Stack& stack) {
 		switch (data) {
 			case INST_PLUS:
-				plus(stack);
+				add(stack);
 				break;
 			case INST_MINUS:
 				sub(stack);
+				break;
+			case INST_MULTIPLICATION:
+				mul(stack);
 				break;
 			default:
 				throw "No such a instruction";
@@ -146,7 +185,7 @@ namespace model {
 	 * @param  Stack& stack which will be applicated
 	 * @return Stack&
 	 */
-	Stack& Instruction::plus(Stack& stack) {
+	Stack& Instruction::add(Stack& stack) {
 		Element *arg1, *arg2, *result;
 		
 		arg2 = stack.pop();
@@ -184,6 +223,33 @@ namespace model {
 			result = arg1->cast<Integer>()->sub(arg2);
 		} else if (arg1->instance_of<Float>()) {
 			result = arg1->cast<Float>()->sub(arg2);
+		}
+
+		stack.push(result);
+
+		delete arg1;
+		delete arg2;
+
+		return stack;
+	}
+
+	/**
+	 * applicate mutliplication
+	 *
+	 * @param  Stack& stack which will be applicated
+	 * @return Stack&
+	 */
+	Stack& Instruction::mul(Stack& stack) {
+		Element *arg1, *arg2, *result;
+		
+		arg2 = stack.pop();
+		arg1 = stack.pop();
+		result = NULL;
+
+		if (arg1->instance_of<Integer>()) {
+			result = arg1->cast<Integer>()->mul(arg2);
+		} else if (arg1->instance_of<Float>()) {
+			result = arg1->cast<Float>()->mul(arg2);
 		}
 
 		stack.push(result);

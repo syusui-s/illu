@@ -25,6 +25,8 @@ namespace lexer {
 				return new model::Instruction(model::Instruction::INST_PLUS);
 			case T_INST_MINUS:
 				return new model::Instruction(model::Instruction::INST_MINUS);
+			case T_INST_MULTIPLICATION:
+				return new model::Instruction(model::Instruction::INST_MULTIPLICATION);
 			default:
 				throw "TokenConvertionError";
 		}
