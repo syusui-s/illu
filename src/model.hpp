@@ -65,7 +65,8 @@ namespace model {
 	 * 
 	 * @see Numeric
 	 */
-	class Integer : public Numeric {
+	class Integer : public Numeric
+	{
 		public:
 			typedef int TYPE;
 		private:

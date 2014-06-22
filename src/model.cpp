@@ -66,8 +66,7 @@ namespace model {
 	/**
 	 * Convert Float to String
 	 */
-	std::string Float::to_string() const
-	{
+	std::string Float::to_string() const {
 		std::stringstream ss;
 		ss << this->data;
 
@@ -110,7 +109,7 @@ namespace model {
 	}
 
 	//////////////////////////
-	// Nil
+	// String
 	std::string String::to_string() const {
 		return this->data;
 	}
