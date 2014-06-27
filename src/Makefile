@@ -1,4 +1,4 @@
-PROGRAM := rpn
+PROGRAM := stap
 SRCS := model.cpp scanner.cpp tokenizer.cpp main.cpp
 OBJS := $(subst .cpp,.o,$(SRCS))
 
