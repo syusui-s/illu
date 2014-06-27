@@ -149,6 +149,16 @@ namespace model {
 			Nil() {};
 			virtual ~Nil() {};
 
+			/**
+			 * get single instance
+			 *
+			 * @return Nil&
+			 */
+			static Element* get_instance() {
+				static Nil nil;
+				return &nil;
+			}
+
 			// Instance Methods
 			virtual std::string to_string() const;
 	};

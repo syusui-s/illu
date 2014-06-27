@@ -13,6 +13,7 @@ namespace tokentype {
 		T_INTEGER,
 		T_FLOAT,
 		T_STRING,
+		T_NIL,
 		// Instructions
 		T_INST_PLUS,
 		T_INST_MINUS,
