@@ -72,7 +72,11 @@ int main()
 
 	std::cout << "stack4: " << stack4.to_string() << std::endl;
 
-	// application
+	// String Tokenize Test
+	lexer::Tokenizer tokenizer3("1 2 3 + 4 \"string data example\" 12 34");
+	std::cout << "string data: " << tokenizer3.tokenize().to_stack().to_string() << std::endl;
+
+	// REPL
 	std::string input;
 	model::Stack stack5;
 	lexer::TokenVector tokvec;

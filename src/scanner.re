@@ -42,7 +42,7 @@ namespace lexer {
 				IDENTIFIER = [a-zA-Z_][a-zA-Z_0-9]*;
 				INTEGER    = [+-]?[0-9]+;
 				FLOAT      = [+-]?[0-9]+"."[0-9]+;
-				STRING     = "'".*"'";
+				STRING     = ["][^"\000\n]*["];
 				NULL       = "\000";
 
 				" "			{ continue; }
