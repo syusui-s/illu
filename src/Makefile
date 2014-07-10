@@ -2,9 +2,8 @@ PROGRAM := stap
 SRCS := model.cpp scanner.cpp tokenizer.cpp main.cpp
 OBJS := $(subst .cpp,.o,$(SRCS))
 
-CXX := clang++
-
-CXXFLAGS := -Wall -Werror -O2 -std=c++11
+CXX ?= clang++
+CXXFLAGS += -Wall -Werror -O2 -std=c++11
 #INCLUDES := include/
 RE2C := re2c
 #LIBS := ""
@@ -12,7 +11,7 @@ RE2C := re2c
 all: $(PROGRAM)
 
 $(PROGRAM): $(OBJS)
-	$(CXX) $(OBJS) -o $(PROGRAM)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(PROGRAM)
 
 scanner.o: scanner.cpp
 scanner.cpp: scanner.re
