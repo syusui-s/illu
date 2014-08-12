@@ -141,14 +141,16 @@ namespace model {
 	/**
 	 * Nil data
 	 *
-	 * this is called as NULL in other lang
+	 * This is a singleton class.
+	 * Call get_instance to get 
+	 * this is called as NULL in other languages.
 	 */
 	class Nil : public Element
 	{
-		public:
+		private:
 			Nil() {};
+		public:
 			virtual ~Nil() {};
-
 			/**
 			 * get single instance
 			 *
