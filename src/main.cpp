@@ -6,6 +6,7 @@
 
 int main()
 {
+	/*
 	model::Stack stack, stack2;
 
 	stack.push(new model::Integer(1));
@@ -35,6 +36,7 @@ int main()
 	model::Instruction inst = model::Instruction::INST_PLUS;
 	inst.applicate(stack);
 	std::cout << "3 + 4 = " << stack.back()->cast<model::Integer>()->get_data() << std::endl;
+	*/
 
 	// スタックの内容確認
 	/*
@@ -51,6 +53,7 @@ int main()
 	}
 	*/
 
+	/*
 	// stack1
 	// std::cout << stack.at(-1) << std::endl;
 	//
@@ -75,6 +78,7 @@ int main()
 	// String Tokenize Test
 	lexer::Tokenizer tokenizer3("1 2 3 + 4 \"string data example\" 12 34");
 	std::cout << "string data: " << tokenizer3.tokenize().to_stack().to_string() << std::endl;
+	*/
 
 	// REPL
 	std::string input;
@@ -82,7 +86,7 @@ int main()
 	lexer::TokenVector tokvec;
 
 	while (true) {
-		std::cout << std::endl << "Input> ";
+		std::cout << "Input> ";
 		std::getline(std::cin, input);
 
 		lexer::Tokenizer* p_tokenizer = new lexer::Tokenizer(input);
