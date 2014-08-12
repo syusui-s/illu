@@ -19,7 +19,7 @@ namespace lexer {
 			case T_FLOAT:
 				return new model::Float(lexeme);
 			case T_STRING:
-				return new model::String(lexeme);
+				return new model::String( lexeme.substr(1, lexeme.length() - 2) );
 			case T_NIL:
 				return model::Nil::get_instance();
 			// Instructions

@@ -135,8 +135,10 @@ namespace model {
 			// Instance Methods
 			virtual std::string to_string() const;
 			inline std::string get_data() { return data; }
-	};
 
+			// Operators
+			Element* add(Element *other);
+	};
 
 	/**
 	 * Nil data

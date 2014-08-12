@@ -109,7 +109,7 @@ namespace model {
 		return ss.str();
 	}
 	/**
-	 * Sub this data and other data
+	 * applicate addtion
 	 */
 	Element* Float::add(Element *other) {
 		Element* rtn;
@@ -183,7 +183,22 @@ namespace model {
 	//////////////////////////
 	// String
 	std::string String::to_string() const {
-		return this->data;
+		return "\"" + this->data + "\"";
+	}
+
+	/**
+	 * Add this data and other data
+	 */
+	Element* String::add(Element *other) {
+		Element* rtn;
+
+		if (other->instance_of<String>()) {
+			rtn = new String( data + other->cast<String>()->get_data() );
+		} else {
+			throw "UnexpectedTypeError";
+		}
+
+		return rtn;
 	}
 
 	//////////////////////////
@@ -235,6 +250,8 @@ namespace model {
 			result = arg1->cast<Integer>()->add(arg2);
 		} else if (arg1->instance_of<Float>()) {
 			result = arg1->cast<Float>()->add(arg2);
+		} else if (arg1->instance_of<String>()) {
+			result = arg1->cast<String>()->add(arg2);
 		}
 
 		stack.push(result);
