@@ -227,6 +227,9 @@ namespace model {
 			case INST_DIVISION:
 				div(stack);
 				break;
+			case INST_DROP:
+				drop(stack);
+				break;
 			default:
 				throw "No such a instruction";
 		}
@@ -340,6 +343,17 @@ namespace model {
 		delete arg1;
 		delete arg2;
 
+		return stack;
+	}
+
+	/**
+	 * drop element
+	 *
+	 * @param  Stack& stack which will be applicated
+	 * @return Stack&
+	 */
+	Stack& Instruction::drop(Stack& stack) {
+		delete stack.pop();
 		return stack;
 	}
 

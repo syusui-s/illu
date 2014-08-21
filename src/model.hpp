@@ -204,5 +204,6 @@ namespace model {
 			Stack& sub(Stack& stack);
 			Stack& mul(Stack& stack);
 			Stack& div(Stack& stack);
+			Stack& drop(Stack& stack);
 	};
 }

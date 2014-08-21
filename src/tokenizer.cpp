@@ -23,6 +23,7 @@ namespace lexer {
 			case T_NIL:
 				return model::Nil::get_instance();
 			// Instructions
+			// - Basic Arithmetic Operations
 			case T_INST_PLUS:
 				return new model::Instruction(model::Instruction::INST_PLUS);
 			case T_INST_MINUS:
@@ -31,6 +32,9 @@ namespace lexer {
 				return new model::Instruction(model::Instruction::INST_MULTIPLICATION);
 			case T_INST_DIVISION:
 				return new model::Instruction(model::Instruction::INST_DIVISION);
+			// - Basic Stack Operations
+			case T_INST_DROP:
+				return new model::Instruction(model::Instruction::INST_DROP);
 			default:
 				throw "TokenConvertionError";
 		}

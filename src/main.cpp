@@ -93,24 +93,34 @@ int main()
 		tokvec = p_tokenizer->tokenize();
 
 		for (auto& tok : tokvec) {
-			if (tok.type == tokentype::T_INST_PLUS
-				|| tok.type == tokentype::T_INST_MINUS
-				|| tok.type == tokentype::T_INST_MULTIPLICATION
-				|| tok.type == tokentype::T_INST_DIVISION
-				) {
-				if (stack5.size() > 1) {
-					tok.to_element()->cast<model::Instruction>()->applicate(stack5);
-				} else {
-					std::cout << "Cannot Applicate Instruction" << std::endl;
-				}
-			} else if (tok.type == tokentype::T_INTEGER
-						|| tok.type == tokentype::T_FLOAT
-						|| tok.type == tokentype::T_STRING
-						|| tok.type == tokentype::T_NIL
-				) {
-				stack5.push(tok.to_element());
-			} else {
-				std::cout << "Unknown TokenType" << std::endl;
+			switch (tok.type) {
+				// Instruction: Basic Operations
+				case tokentype::T_INST_PLUS:
+				case tokentype::T_INST_MINUS:
+				case tokentype::T_INST_MULTIPLICATION:
+				case tokentype::T_INST_DIVISION:
+					if (stack5.size() > 1) {
+						tok.to_element()->cast<model::Instruction>()->applicate(stack5);
+					} else {
+						std::cout << "Cannot Applicate Instruction" << std::endl;
+					}
+					break;
+				case tokentype::T_INST_DROP:
+					if (! stack5.empty()) {
+						tok.to_element()->cast<model::Instruction>()->applicate(stack5);
+					} else {
+						std::cout << "Cannot Applicate Instruction" << std::endl;
+					}
+					break;
+				// Literal Data
+				case tokentype::T_INTEGER:
+				case tokentype::T_FLOAT:
+				case tokentype::T_STRING:
+				case tokentype::T_NIL:
+					stack5.push(tok.to_element());
+					break;
+				default:
+					std::cout << "Unknown TokenType" << std::endl;
 			}
 		}
 		delete p_tokenizer;

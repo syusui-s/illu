@@ -48,22 +48,27 @@ namespace lexer {
 				" "			{ continue; }
 				NULL		{ --cursor; type = tokentype::T_EOF; return false; }
 
+				// Instructions
+				// - Basic Arithmetic Operations
+				"+"			{ type = tokentype::T_INST_PLUS; return true; }
+				"-"			{ type = tokentype::T_INST_MINUS; return true; }
+				"*"			{ type = tokentype::T_INST_MULTIPLICATION; return true; }
+				"/"			{ type = tokentype::T_INST_DIVISION; return true; }
+
+				// - Basic Stack Operations
+				"drop"		{ type = tokentype::T_INST_DROP; return true; }
+				"."			{ type = tokentype::T_INST_DROP; return true; }
+
 				// Singleton Objects
 				"nil"		{ type = tokentype::T_NIL; return true; }
-
-				// Identifier
-				IDENTIFIER	{ type = tokentype::T_IDENTIFIER; return true; }
 
 				// Literal Expressions
 				STRING		{ type = tokentype::T_STRING; return true; }
 				INTEGER		{ type = tokentype::T_INTEGER; return true; }
 				FLOAT		{ type = tokentype::T_FLOAT; return true; }
 
-				// Operators
-				"+"			{ type = tokentype::T_INST_PLUS; return true; }
-				"-"			{ type = tokentype::T_INST_MINUS; return true; }
-				"*"			{ type = tokentype::T_INST_MULTIPLICATION; return true; }
-				"/"			{ type = tokentype::T_INST_DIVISION; return true; }
+				// Identifier
+				IDENTIFIER	{ type = tokentype::T_IDENTIFIER; return true; }
 
 				// Undefined
 				[^]			{ type = tokentype::T_UNDEFINED; return true; }
