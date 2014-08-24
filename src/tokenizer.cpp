@@ -4,7 +4,7 @@ namespace lexer {
 	//////////////////////////////////
 	// Token
 	/**
-	 * Convert Token to Element
+	 * Convert Token to Element if possible
 	 *
 	 * @return Element*
 	 */
@@ -42,24 +42,6 @@ namespace lexer {
 	}
 
 	//////////////////////////////////
-	// TokenVector
-	/**
-	 * Convert self into Stack
-	 *
-	 * @return model::Stack
-	 */
-	model::Stack TokenVector::to_stack()
-	{
-		model::Stack stack;
-		
-		for (auto&& elem : *this) {
-			stack.push(elem.to_element());
-		}
-
-		return stack;
-	}
-
-	//////////////////////////////////
 	// Tokenizer
 	/**
 	 * Read Next Token
@@ -81,21 +63,4 @@ namespace lexer {
 			this->scanner->current_tokentype()
 		);
 	}
-
-	/**
-	 * Tokenize string and convert it into TokenVector
-	 *
-	 * @return TokenVector
-	 */
-	TokenVector Tokenizer::tokenize() {
-		TokenVector token_vector;
-
-		while (this->read_next()) {
-			token_vector.push_back(this->current_token());
-		}
-
-		return token_vector;
-	}
-
-	
 } // namespace lexer

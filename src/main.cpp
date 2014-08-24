@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 
 #include "model.hpp"
 #include "scanner.hpp"
@@ -8,34 +9,36 @@ int main()
 {
 	// REPL
 	std::string input;
-	model::Stack stack5;
-	lexer::TokenVector tokvec;
+	std::list<model::Stack*> loadstack;
+	loadstack.push_back(new model::Stack);
 
 	while (true) {
 		std::cout << "Input> ";
 		std::getline(std::cin, input);
 
 		lexer::Tokenizer* p_tokenizer = new lexer::Tokenizer(input);
-		tokvec = p_tokenizer->tokenize();
 
-		for (auto& tok : tokvec) {
+		while (p_tokenizer->read_next()) {
+			lexer::Token tok = p_tokenizer->current_token();
+
 			switch (tok.type) {
 				// Instruction: Basic Operations
 				case tokentype::T_INST_PLUS:
 				case tokentype::T_INST_MINUS:
 				case tokentype::T_INST_MULTIPLICATION:
 				case tokentype::T_INST_DIVISION:
-					if (stack5.size() > 1) {
-						tok.to_element()->cast<model::Instruction>()->applicate(stack5);
+					if (loadstack.back()->size() > 1) {
+						tok.to_element()->cast<model::Instruction>()->applicate(*loadstack.back());
 					} else {
-						std::cout << "Cannot Applicate Instruction" << std::endl;
+						std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;
 					}
 					break;
+				// Instruction: Stack Operations
 				case tokentype::T_INST_DROP:
-					if (! stack5.empty()) {
-						tok.to_element()->cast<model::Instruction>()->applicate(stack5);
+					if (! loadstack.back()->empty()) {
+						tok.to_element()->cast<model::Instruction>()->applicate(*loadstack.back());
 					} else {
-						std::cout << "Cannot Applicate Instruction" << std::endl;
+						std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;
 					}
 					break;
 				// Literal Data
@@ -43,15 +46,17 @@ int main()
 				case tokentype::T_FLOAT:
 				case tokentype::T_STRING:
 				case tokentype::T_NIL:
-					stack5.push(tok.to_element());
+					loadstack.back()->push(tok.to_element());
 					break;
 				default:
-					std::cout << "Unknown TokenType" << std::endl;
+					// generally this error stops this program,
+					// but I'll keep it for debug until exception function is implemented.
+					std::cerr << "Unknown TokenType" << std::endl;
 			}
 		}
 		delete p_tokenizer;
 
-		std::cout << "Data Stack: " << stack5.to_string() << std::endl;
+		std::cout << "Data Stack: " << loadstack.back()->to_string() << std::endl;
 	}
 
 	return 0;

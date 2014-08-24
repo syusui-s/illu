@@ -27,8 +27,6 @@ namespace lexer {
 	 */
 	class TokenVector : public std::vector<Token>
 	{
-		public:
-			model::Stack to_stack();
 	};
 
 	/**
@@ -45,7 +43,6 @@ namespace lexer {
 			}
 			bool read_next();
 			Token current_token();
-			TokenVector tokenize();
 	};
 
 } // lexer
