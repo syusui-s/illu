@@ -255,6 +255,11 @@ namespace model {
 			result = arg1->cast<Float>()->add(arg2);
 		} else if (arg1->instance_of<String>()) {
 			result = arg1->cast<String>()->add(arg2);
+		} else if (arg1->instance_of<Stack>()) {
+			*arg1->cast<Stack>() += *arg2->cast<Stack>();
+			stack.push(arg1);
+			delete arg2;
+			return stack;
 		}
 
 		stack.push(result);
