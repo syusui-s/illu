@@ -37,10 +37,10 @@ namespace model {
 	/**
 	 * Handle Stack of Element pointers
 	 */
-	class Stack : public std::vector<Element*>
+	class Stack : public std::vector<Element*>, public Element
 	{
 		public:
-			std::string to_string() const;
+			virtual std::string to_string() const;
 			void push(Element*);
 			void drop();
 			Element* pop();

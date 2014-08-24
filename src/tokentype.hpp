@@ -6,14 +6,23 @@ namespace tokentype {
 	 * Definition of All Token-types
 	 */
 	typedef enum {
+		// Special Tokens
 		T_UNDEFINED  = -1,
 		T_EOF        =  0,
+
+		// Identifier
 		T_IDENTIFIER =  1,
+
+		// Stack Expressions
+		T_STACK_START,
+		T_STACK_END,
+
 		// Data Types
 		T_INTEGER,
 		T_FLOAT,
 		T_STRING,
 		T_NIL,
+
 		// Instructions
 		// - Basic Arithmec Operations
 		T_INST_PLUS,

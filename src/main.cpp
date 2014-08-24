@@ -10,6 +10,7 @@ int main()
 	// REPL
 	std::string input;
 	std::list<model::Stack*> loadstack;
+	model::Stack* laststack;
 	loadstack.push_back(new model::Stack);
 
 	while (true) {
@@ -22,6 +23,15 @@ int main()
 			lexer::Token tok = p_tokenizer->current_token();
 
 			switch (tok.type) {
+				// Stack
+				case tokentype::T_STACK_START:
+					loadstack.push_back(new model::Stack);
+					break;
+				case tokentype::T_STACK_END:
+					laststack = loadstack.back();
+					loadstack.pop_back();
+					loadstack.back()->push(laststack);
+					break;
 				// Instruction: Basic Operations
 				case tokentype::T_INST_PLUS:
 				case tokentype::T_INST_MINUS:
@@ -56,7 +66,7 @@ int main()
 		}
 		delete p_tokenizer;
 
-		std::cout << "Data Stack: " << loadstack.back()->to_string() << std::endl;
+		std::cout << "Data Stack: " << loadstack.front()->to_string() << std::endl;
 	}
 
 	return 0;

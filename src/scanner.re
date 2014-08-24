@@ -39,14 +39,20 @@ namespace lexer {
 				re2c:yych:conversion = 1;
 				re2c:indent:top      = 1;
 
+				// Literal Expressions Definitions
 				IDENTIFIER = [a-zA-Z_][a-zA-Z_0-9]*;
 				INTEGER    = [+-]?[0-9]+;
 				FLOAT      = [+-]?[0-9]+"."[0-9]+;
 				STRING     = ["][^"\000\n]*["];
 				NULL       = "\000";
 
+				// Special Chars
 				" "			{ continue; }
 				NULL		{ --cursor; type = tokentype::T_EOF; return false; }
+
+				// Stack Expressions
+				"["			{ type = tokentype::T_STACK_START; return true; }
+				"]"			{ type = tokentype::T_STACK_END;   return true; }
 
 				// Instructions
 				// - Basic Arithmetic Operations

@@ -367,12 +367,12 @@ namespace model {
 	 */
 	std::string Stack::to_string() const
 	{
-		std::string str("");
+		std::string str("[ ");
 
 		for (auto iterator : *this) {
-			str += iterator->to_string();
-			str += " ";
+			str += iterator->to_string() + " ";
 		}
+		str += "]";
 
 		return str;
 	}
