@@ -1,6 +1,12 @@
 #include <iostream>
 #include <list>
 
+extern "C" {
+	namespace editline {
+		#include <editline/readline.h>
+	} // namespace editline
+}
+
 #include "model.hpp"
 #include "scanner.hpp"
 #include "tokenizer.hpp"
@@ -8,14 +14,20 @@
 int main()
 {
 	// REPL
+	char* cstr_input;
 	std::string input;
 	std::list<model::Stack*> loadstack;
 	model::Stack* laststack;
+
 	loadstack.push_back(new model::Stack);
 
+	editline::using_history();
+
 	while (true) {
-		std::cout << "Input> ";
-		std::getline(std::cin, input);
+		cstr_input = editline::readline("Input> ");
+		editline::add_history(cstr_input);
+		input = cstr_input;
+
 
 		lexer::Tokenizer* p_tokenizer = new lexer::Tokenizer(input);
 

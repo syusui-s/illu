@@ -10,7 +10,7 @@ RE2C := re2c
 all: $(PROGRAM)
 
 $(PROGRAM): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(PROGRAM)
+	$(CXX) $(CXXFLAGS) -ledit $(OBJS) -o $(PROGRAM)
 
 .SUFFIXES: .cpp .o
 .cpp.o:
