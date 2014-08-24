@@ -1,6 +1,5 @@
 PROGRAM := illu
-SRCS := model.cpp scanner.cpp tokenizer.cpp main.cpp
-OBJS := $(subst .cpp,.o,$(SRCS))
+OBJS := model.o scanner.o tokenizer.o main.o
 
 CXX ?= clang++
 CXXFLAGS += -Wall -Werror -O2 -std=c++11
@@ -13,10 +12,15 @@ all: $(PROGRAM)
 $(PROGRAM): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(PROGRAM)
 
+.SUFFIXES: .cpp .o
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $<
+
 scanner.o: scanner.cpp
 scanner.cpp: scanner.re
 	$(RE2C) -o $@ $<
 
+.PHONY: clean clean-without-program
 clean:
 	$(RM) $(OBJS)  scanner.cpp $(PROGRAM)
 
