@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <list>
 #include <string>
 #include <sstream>
 #include <memory>
@@ -40,7 +40,7 @@ namespace model {
 	/**
 	 * Handle Stack of Element pointers
 	 */
-	class Stack : public std::vector<Element*>, public Element
+	class Stack : public std::list<Element*>, public Element
 	{
 		public:
 			virtual std::string to_string() const;

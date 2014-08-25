@@ -23,13 +23,6 @@ namespace lexer {
 	};
 
 	/**
-	 * Vector of Tokens
-	 */
-	class TokenVector : public std::vector<Token>
-	{
-	};
-
-	/**
 	 * Tokenizer Class
 	 */
 	class Tokenizer
