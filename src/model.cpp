@@ -209,31 +209,23 @@ namespace model {
 
 	//////////////////////////
 	// Instruction
+	const std::map<tokentype::Type, Instruction::S_Instruction> Instruction::instructions = {
+		{ tokentype::T_INST_PLUS,            { Instruction::add,  "+" } },
+		{ tokentype::T_INST_MINUS,           { Instruction::sub,  "-" } },
+		{ tokentype::T_INST_MULTIPLICATION,  { Instruction::mul,  "*" } },
+		{ tokentype::T_INST_DIVISION,        { Instruction::div,  "/" } },
+		{ tokentype::T_INST_DROP,            { Instruction::drop, "drop" } },
+	};
+	
+	std::string Instruction::to_string() const {
+		return this->instructions.at(toktype).expr;
+	}
 
 	/**
 	 * applicate instruction
 	 */
 	Stack& Instruction::applicate(Stack& stack) {
-		switch (data) {
-			case INST_PLUS:
-				add(stack);
-				break;
-			case INST_MINUS:
-				sub(stack);
-				break;
-			case INST_MULTIPLICATION:
-				mul(stack);
-				break;
-			case INST_DIVISION:
-				div(stack);
-				break;
-			case INST_DROP:
-				drop(stack);
-				break;
-			default:
-				throw "No such a instruction";
-		}
-		return stack;
+		return this->instructions.at(toktype).func(stack);
 	}
 
 	/**
@@ -256,6 +248,7 @@ namespace model {
 		} else if (arg1->instance_of<String>()) {
 			result = arg1->cast<String>()->add(arg2);
 		} else if (arg1->instance_of<Stack>()) {
+			if (! arg2->instance_of<Stack>()) throw "UnexpectedTypeError";
 			*arg1->cast<Stack>() += *arg2->cast<Stack>();
 			stack.push(arg1);
 			delete arg2;

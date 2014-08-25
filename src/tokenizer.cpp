@@ -25,16 +25,16 @@ namespace lexer {
 			// Instructions
 			// - Basic Arithmetic Operations
 			case T_INST_PLUS:
-				return new model::Instruction(model::Instruction::INST_PLUS);
+				return new model::Instruction(tokentype::T_INST_PLUS);
 			case T_INST_MINUS:
-				return new model::Instruction(model::Instruction::INST_MINUS);
+				return new model::Instruction(tokentype::T_INST_MINUS);
 			case T_INST_MULTIPLICATION:
-				return new model::Instruction(model::Instruction::INST_MULTIPLICATION);
+				return new model::Instruction(tokentype::T_INST_MULTIPLICATION);
 			case T_INST_DIVISION:
-				return new model::Instruction(model::Instruction::INST_DIVISION);
+				return new model::Instruction(tokentype::T_INST_DIVISION);
 			// - Basic Stack Operations
 			case T_INST_DROP:
-				return new model::Instruction(model::Instruction::INST_DROP);
+				return new model::Instruction(tokentype::T_INST_DROP);
 			default:
 				throw "TokenConvertionError";
 		}

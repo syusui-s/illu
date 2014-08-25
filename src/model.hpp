@@ -4,6 +4,9 @@
 #include <string>
 #include <sstream>
 #include <memory>
+#include <map>
+
+#include "tokentype.hpp"
 
 namespace model {
 	/**
@@ -171,39 +174,28 @@ namespace model {
 	// Instruction Classes
 	class Instruction : public Element
 	{
-		public:
-			/**
-			 * Definition of All operators
-			 */
-			enum Instructions {
-				// basic arithmetic operators
-				INST_PLUS, INST_MINUS, INST_MULTIPLICATION, INST_DIVISION,
-				// monadic operators
-				INST_ABSOLUTE, INST_SIGN_INVERSE, INST_INVERSE,
-				// exponential function
-				INST_POWER, INST_SQRT, INST_CBRT, INST_EXP,
-				// logarithm functions
-				INST_NATURAL_LOG, INST_COMMON_LOG, INST_LOG,
-				// trigonometric functions
-				INST_SIN, INST_COS, INST_TAN, INST_ASIN, INST_ACOS, INST_ATAN,
-				// hyperbolic functions
-				INST_SINH, INST_COSH, INST_TANH, INST_ASINH, INST_ACOSH, INST_ATANH,
-				// data structure operations
-				INST_POP, INST_DROP, INST_ROLL, INST_SWAP,
-			};
 		private:
-			const Instructions data;
+			// Instruction
+			typedef struct {
+				model::Stack& (*func)(model::Stack&); // Pointer to a static member function
+				std::string expr;                     // Human Readable Expression
+			} S_Instruction;
+
+			// Function
+			static Stack& add(Stack& stack);
+			static Stack& sub(Stack& stack);
+			static Stack& mul(Stack& stack);
+			static Stack& div(Stack& stack);
+			static Stack& drop(Stack& stack);
+
+			// Instructions Map
+			static const std::map<tokentype::Type, S_Instruction> instructions;
+			tokentype::Type toktype;
 		public:
-			Instruction(const Instructions _data) : data(_data) {}
+			Instruction(const tokentype::Type _toktype) : toktype(_toktype) {}
 			virtual ~Instruction() {}
 
-			std::string to_string() const { return ""; } // TODO implementation
-
+			std::string to_string() const;
 			Stack& applicate(Stack& stack);
-			Stack& add(Stack& stack);
-			Stack& sub(Stack& stack);
-			Stack& mul(Stack& stack);
-			Stack& div(Stack& stack);
-			Stack& drop(Stack& stack);
 	};
 }
