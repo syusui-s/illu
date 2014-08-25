@@ -49,7 +49,9 @@ int main()
 				case tokentype::T_INST_MINUS:
 				case tokentype::T_INST_MULTIPLICATION:
 				case tokentype::T_INST_DIVISION:
-					if (loadstack.back()->size() > 1) {
+					if (loadstack.back() != loadstack.front()) {
+						loadstack.back()->push(tok.to_element());
+					} else if (loadstack.back()->size() > 1) {
 						tok.to_element()->cast<model::Instruction>()->applicate(*loadstack.back());
 					} else {
 						std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;
@@ -57,7 +59,9 @@ int main()
 					break;
 				// Instruction: Stack Operations
 				case tokentype::T_INST_DROP:
-					if (! loadstack.back()->empty()) {
+					if (loadstack.back() != loadstack.front()) {
+						loadstack.back()->push(tok.to_element());
+					} else if (! loadstack.back()->empty()) {
 						tok.to_element()->cast<model::Instruction>()->applicate(*loadstack.back());
 					} else {
 						std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;
