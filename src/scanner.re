@@ -44,6 +44,7 @@ namespace lexer {
 				INTEGER    = [+-]?[0-9]+;
 				FLOAT      = [+-]?[0-9]+"."[0-9]+;
 				STRING     = ["][^"\000\n]*["];
+				SYMBOL     = ":"IDENTIFIER;
 				NULL       = "\000";
 
 				// Special Chars
@@ -72,6 +73,7 @@ namespace lexer {
 				STRING		{ type = tokentype::T_STRING; return true; }
 				INTEGER		{ type = tokentype::T_INTEGER; return true; }
 				FLOAT		{ type = tokentype::T_FLOAT; return true; }
+				SYMBOL		{ type = tokentype::T_SYMBOL; return true; }
 
 				// Identifier
 				IDENTIFIER	{ type = tokentype::T_IDENTIFIER; return true; }

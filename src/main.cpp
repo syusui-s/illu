@@ -72,12 +72,14 @@ int main()
 				case tokentype::T_FLOAT:
 				case tokentype::T_STRING:
 				case tokentype::T_NIL:
+				case tokentype::T_SYMBOL:
 					loadstack.back()->push(tok.to_element());
 					break;
 				default:
 					// generally this error stops this program,
 					// but I'll keep it for debug until exception function is implemented.
 					std::cerr << "Unknown TokenType" << std::endl;
+					while (p_tokenizer->read_next()) {}
 			}
 		}
 		delete p_tokenizer;

@@ -146,9 +146,7 @@ namespace model {
 	/**
 	 * Nil data
 	 *
-	 * This is a singleton class.
-	 * Call get_instance to get 
-	 * this is called as NULL in other languages.
+	 * NULL data expression
 	 */
 	class Nil : public Element
 	{
@@ -157,6 +155,24 @@ namespace model {
 			virtual ~Nil() {};
 			// Instance Methods
 			virtual std::string to_string() const;
+	};
+
+	/**
+	 * Symbol data
+	 *
+	 * Symbol represents a string that can be a IDENTIFIER
+	 * e.g. used in where interpreter register user defined function to function table
+	 */
+	class Symbol : public Element
+	{
+		private:
+			const std::string data;
+		public:
+			Symbol(const std::string &_data) : data(_data) {}
+
+			// Instance Methods
+			virtual std::string to_string() const;
+			inline std::string get_data() { return data; }
 	};
 
 	//////////////////////////

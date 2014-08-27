@@ -19,9 +19,11 @@ namespace lexer {
 			case T_FLOAT:
 				return new model::Float(lexeme);
 			case T_STRING:
-				return new model::String( lexeme.substr(1, lexeme.length() - 2) );
+				return new model::String( lexeme.substr(1, lexeme.length() - 2 ) );
 			case T_NIL:
 				return new model::Nil();
+			case T_SYMBOL:
+				return new model::Symbol( lexeme.substr(1, lexeme.length() - 1 ) );
 			// Instructions
 			// - Basic Arithmetic Operations
 			case T_INST_PLUS:

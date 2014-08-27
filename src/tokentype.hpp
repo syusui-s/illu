@@ -22,6 +22,7 @@ namespace tokentype {
 		T_FLOAT,
 		T_STRING,
 		T_NIL,
+		T_SYMBOL,
 
 		// Instructions
 		// - Basic Arithmec Operations
