@@ -175,6 +175,24 @@ namespace model {
 			inline std::string get_data() { return data; }
 	};
 
+	/**
+	 * Identifier
+	 *
+	 * Identifier is a string data represents some data in the table
+	 * instance will be replaced with a tethered data
+	 */
+	class Identifier : public Element
+	{
+		private:
+			const std::string data;
+		public:
+			Identifier(const std::string &_data) : data(_data) {}
+
+			// Instance Methods
+			virtual std::string to_string() const;
+			inline  std::string get_data() { return data; }
+	};
+
 	//////////////////////////
 	// Instruction Classes
 	class Instruction : public Element

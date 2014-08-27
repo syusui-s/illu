@@ -44,6 +44,13 @@ int main()
 					loadstack.pop_back();
 					loadstack.back()->push(laststack);
 					break;
+				case tokentype::T_IDENTIFIER:
+					if (loadstack.back() != loadstack.front()) {
+						loadstack.back()->push_back(tok.to_element());
+					} else {
+						std::cerr << "Identifier is not implemented." << std::endl;
+					}
+					break;
 				// Instruction: Basic Operations
 				case tokentype::T_INST_PLUS:
 				case tokentype::T_INST_MINUS:

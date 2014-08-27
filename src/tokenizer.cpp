@@ -14,6 +14,8 @@ namespace lexer {
 
 		switch (this->type) {
 			// Data Types
+			case T_IDENTIFIER:
+				return new model::Identifier(lexeme);
 			case T_INTEGER:
 				return new model::Integer(lexeme, 10);
 			case T_FLOAT:

@@ -214,6 +214,12 @@ namespace model {
 	}
 
 	//////////////////////////
+	// Identifier
+	std::string Identifier::to_string() const {
+		return this->data;
+	}
+
+	//////////////////////////
 	// Instruction
 	const std::map<tokentype::Type, Instruction::S_Instruction> Instruction::instructions = {
 		{ tokentype::T_INST_PLUS,            { Instruction::add,  "+" } },
