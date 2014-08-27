@@ -21,7 +21,7 @@ namespace lexer {
 			case T_STRING:
 				return new model::String( lexeme.substr(1, lexeme.length() - 2) );
 			case T_NIL:
-				return model::Nil::get_instance();
+				return new model::Nil();
 			// Instructions
 			// - Basic Arithmetic Operations
 			case T_INST_PLUS:
