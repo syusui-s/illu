@@ -24,7 +24,7 @@ namespace model {
 			 */
 			template<typename T>
 			inline bool instance_of() const {
-				return dynamic_cast<const T*>(this) != NULL;
+				return typeid(*this) == typeid(const T);
 			}
 
 			/**
