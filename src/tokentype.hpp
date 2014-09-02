@@ -22,6 +22,8 @@ namespace tokentype {
 		T_FLOAT,
 		T_STRING,
 		T_NIL,
+		T_BOOLEAN_TRUE,
+		T_BOOLEAN_FALSE,
 		T_SYMBOL,
 
 		// Instructions

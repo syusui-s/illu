@@ -158,6 +158,22 @@ namespace model {
 	};
 
 	/**
+	 * Boolean data
+	 *
+	 * True / False data
+	 */
+	class Boolean : public Element
+	{
+		private:
+			const bool data;
+		public:
+			Boolean(const bool &_data) : data(_data) {};
+			virtual ~Boolean() {};
+			// Instance Methods
+			virtual std::string to_string() const;
+	};
+
+	/**
 	 * Symbol data
 	 *
 	 * Symbol represents a string that can be a IDENTIFIER

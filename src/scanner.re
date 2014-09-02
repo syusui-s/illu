@@ -75,6 +75,10 @@ namespace lexer {
 				FLOAT		{ type = tokentype::T_FLOAT; return true; }
 				SYMBOL		{ type = tokentype::T_SYMBOL; return true; }
 
+				// Boolean Expressions
+				"true"		{ type = tokentype::T_BOOLEAN_TRUE; return true; }
+				"false"		{ type = tokentype::T_BOOLEAN_FALSE; return true; }
+
 				// Identifier
 				IDENTIFIER	{ type = tokentype::T_IDENTIFIER; return true; }
 

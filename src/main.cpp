@@ -80,6 +80,8 @@ int main()
 				case tokentype::T_STRING:
 				case tokentype::T_NIL:
 				case tokentype::T_SYMBOL:
+				case tokentype::T_BOOLEAN_TRUE:
+				case tokentype::T_BOOLEAN_FALSE:
 					loadstack.back()->push(tok.to_element());
 					break;
 				default:

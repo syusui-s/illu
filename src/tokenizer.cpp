@@ -24,6 +24,10 @@ namespace lexer {
 				return new model::String( lexeme.substr(1, lexeme.length() - 2 ) );
 			case T_NIL:
 				return new model::Nil();
+			case T_BOOLEAN_TRUE:
+				return new model::Boolean(true);
+			case T_BOOLEAN_FALSE:
+				return new model::Boolean(false);
 			case T_SYMBOL:
 				return new model::Symbol( lexeme.substr(1, lexeme.length() - 1 ) );
 			// Instructions

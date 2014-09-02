@@ -208,6 +208,12 @@ namespace model {
 	}
 
 	//////////////////////////
+	// Boolean
+	std::string Boolean::to_string() const {
+		return this->data ? "true" : "false";
+	}
+
+	//////////////////////////
 	// Symbol
 	std::string Symbol::to_string() const {
 		return ":" + this->data;
