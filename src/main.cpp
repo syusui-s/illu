@@ -28,7 +28,6 @@ int main()
 		editline::add_history(cstr_input);
 		input = cstr_input;
 
-
 		lexer::Tokenizer* p_tokenizer = new lexer::Tokenizer(input);
 
 		while (p_tokenizer->read_next()) {
@@ -51,24 +50,15 @@ int main()
 						std::cerr << "Identifier is not implemented." << std::endl;
 					}
 					break;
-				// Instruction: Basic Operations
+				// Instructions
 				case tokentype::T_INST_PLUS:
 				case tokentype::T_INST_MINUS:
 				case tokentype::T_INST_MULTIPLICATION:
 				case tokentype::T_INST_DIVISION:
-					if (loadstack.back() != loadstack.front()) {
-						loadstack.back()->push(tok.to_element());
-					} else if (loadstack.back()->size() > 1) {
-						tok.to_element()->cast<model::Instruction>()->applicate(*loadstack.back());
-					} else {
-						std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;
-					}
-					break;
-				// Instruction: Stack Operations
 				case tokentype::T_INST_DROP:
 					if (loadstack.back() != loadstack.front()) {
 						loadstack.back()->push(tok.to_element());
-					} else if (! loadstack.back()->empty()) {
+					} else if (loadstack.back()->size() >= tok.to_element()->cast<model::Instruction>()->num_of_args()) {
 						tok.to_element()->cast<model::Instruction>()->applicate(*loadstack.back());
 					} else {
 						std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;

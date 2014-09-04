@@ -227,23 +227,41 @@ namespace model {
 
 	//////////////////////////
 	// Instruction
+	
+	/**
+	 * Functions map
+	 */
 	const std::map<tokentype::Type, Instruction::S_Instruction> Instruction::instructions = {
-		{ tokentype::T_INST_PLUS,            { Instruction::add,  "+" } },
-		{ tokentype::T_INST_MINUS,           { Instruction::sub,  "-" } },
-		{ tokentype::T_INST_MULTIPLICATION,  { Instruction::mul,  "*" } },
-		{ tokentype::T_INST_DIVISION,        { Instruction::div,  "/" } },
-		{ tokentype::T_INST_DROP,            { Instruction::drop, "drop" } },
+		{ tokentype::T_INST_PLUS,            { Instruction::add,  2, "+" } },
+		{ tokentype::T_INST_MINUS,           { Instruction::sub,  2, "-" } },
+		{ tokentype::T_INST_MULTIPLICATION,  { Instruction::mul,  2, "*" } },
+		{ tokentype::T_INST_DIVISION,        { Instruction::div,  2, "/" } },
+		{ tokentype::T_INST_DROP,            { Instruction::drop, 1, "drop" } },
 	};
 	
+	/**
+	 * returns string expression of Instruction
+	 *
+	 * @return std::string
+	 */
 	std::string Instruction::to_string() const {
-		return this->instructions.at(toktype).expr;
+		return this->instructions.at(toktype).string_expression;
+	}
+
+	/**
+	 * returns number of arguments
+	 *
+	 * @return size_t Number of Arguments
+	 */
+	size_t Instruction::num_of_args() const {
+		return this->instructions.at(toktype).num_of_args;
 	}
 
 	/**
 	 * applicate instruction
 	 */
 	Stack& Instruction::applicate(Stack& stack) {
-		return this->instructions.at(toktype).func(stack);
+		return this->instructions.at(toktype).pfunc(stack);
 	}
 
 	/**

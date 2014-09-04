@@ -216,9 +216,14 @@ namespace model {
 		private:
 			// Instruction
 			typedef struct {
-				model::Stack& (*func)(model::Stack&); // Pointer to a static member function
-				std::string expr;                     // Human Readable Expression
+				model::Stack& (*pfunc)(model::Stack&); // Pointer to a static member function
+				size_t num_of_args;              // Number of Arguments
+				std::string string_expression;         // Human Readable Expression
 			} S_Instruction;
+
+			// Instructions Map
+			static const std::map<tokentype::Type, S_Instruction> instructions;
+			tokentype::Type toktype;
 
 			// Function
 			static Stack& add(Stack& stack);
@@ -226,15 +231,12 @@ namespace model {
 			static Stack& mul(Stack& stack);
 			static Stack& div(Stack& stack);
 			static Stack& drop(Stack& stack);
-
-			// Instructions Map
-			static const std::map<tokentype::Type, S_Instruction> instructions;
-			tokentype::Type toktype;
 		public:
 			Instruction(const tokentype::Type _toktype) : toktype(_toktype) {}
 			virtual ~Instruction() {}
 
 			std::string to_string() const;
 			Stack& applicate(Stack& stack);
+			size_t num_of_args() const;
 	};
 }
