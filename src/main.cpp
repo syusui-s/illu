@@ -11,8 +11,28 @@ extern "C" {
 #include "scanner.hpp"
 #include "tokenizer.hpp"
 
-int main()
-{
+model::Stack& elem_interpret(model::Element* elem, model::Stack& stack) {
+	// Identifier
+	if (elem->instance_of<model::Identifier>()) {
+		std::cerr << "Identifier is not implemented." << std::endl;
+	// Instruction
+	} else if (elem->instance_of<model::Instruction>()) {
+		model::Instruction* inst = elem->cast<model::Instruction>();
+
+		if (stack.size() >= inst->num_of_args()) {
+			inst->applicate(stack);
+		} else {
+			std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;
+		}
+	// Data Objects
+	} else {
+		stack.push(elem);
+	}
+
+	return stack;
+}
+
+int main() {
 	// REPL
 	char* cstr_input;
 	std::string input;
@@ -32,6 +52,7 @@ int main()
 
 		while (p_tokenizer->read_next()) {
 			lexer::Token tok = p_tokenizer->current_token();
+			model::Element* elem = tok.to_element();
 
 			switch (tok.type) {
 				// Stack
@@ -43,42 +64,17 @@ int main()
 					loadstack.pop_back();
 					loadstack.back()->push(laststack);
 					break;
-				case tokentype::T_IDENTIFIER:
-					if (loadstack.back() != loadstack.front()) {
-						loadstack.back()->push_back(tok.to_element());
-					} else {
-						std::cerr << "Identifier is not implemented." << std::endl;
-					}
-					break;
-				// Instructions
-				case tokentype::T_INST_PLUS:
-				case tokentype::T_INST_MINUS:
-				case tokentype::T_INST_MULTIPLICATION:
-				case tokentype::T_INST_DIVISION:
-				case tokentype::T_INST_DROP:
-					if (loadstack.back() != loadstack.front()) {
-						loadstack.back()->push(tok.to_element());
-					} else if (loadstack.back()->size() >= tok.to_element()->cast<model::Instruction>()->num_of_args()) {
-						tok.to_element()->cast<model::Instruction>()->applicate(*loadstack.back());
-					} else {
-						std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;
-					}
-					break;
-				// Literal Data
-				case tokentype::T_INTEGER:
-				case tokentype::T_FLOAT:
-				case tokentype::T_STRING:
-				case tokentype::T_NIL:
-				case tokentype::T_SYMBOL:
-				case tokentype::T_BOOLEAN_TRUE:
-				case tokentype::T_BOOLEAN_FALSE:
-					loadstack.back()->push(tok.to_element());
-					break;
 				default:
-					// generally this error stops this program,
-					// but I'll keep it for debug until exception function is implemented.
-					std::cerr << "Unknown TokenType" << std::endl;
-					while (p_tokenizer->read_next()) {}
+					if (elem == NULL) {
+						// generally this error stops this program,
+						// but I'll keep it for debug until exception function is implemented.
+						std::cerr << "Unknown TokenType" << std::endl;
+						while (p_tokenizer->read_next()) {}
+					} else if (loadstack.back() != loadstack.front()) {
+						loadstack.back()->push_back(elem);
+					} else {
+						elem_interpret(elem, *loadstack.back());
+					}
 			}
 		}
 		delete p_tokenizer;

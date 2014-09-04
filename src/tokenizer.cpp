@@ -44,7 +44,7 @@ namespace lexer {
 			case T_INST_DROP:
 				return new model::Instruction(tokentype::T_INST_DROP);
 			default:
-				throw "TokenConvertionError";
+				return NULL;
 		}
 
 	}
