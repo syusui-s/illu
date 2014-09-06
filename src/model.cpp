@@ -1,4 +1,5 @@
 #include "model.hpp"
+#include "environment.hpp"
 
 /**
  * namespace model
@@ -232,11 +233,12 @@ namespace model {
 	 * Functions map
 	 */
 	const std::map<tokentype::Type, Instruction::S_Instruction> Instruction::instructions = {
-		{ tokentype::T_INST_PLUS,            { Instruction::add,  2, "+" } },
-		{ tokentype::T_INST_MINUS,           { Instruction::sub,  2, "-" } },
-		{ tokentype::T_INST_MULTIPLICATION,  { Instruction::mul,  2, "*" } },
-		{ tokentype::T_INST_DIVISION,        { Instruction::div,  2, "/" } },
-		{ tokentype::T_INST_DROP,            { Instruction::drop, 1, "drop" } },
+		{ tokentype::T_INST_PLUS,            { Instruction::add,     2, "+" } },
+		{ tokentype::T_INST_MINUS,           { Instruction::sub,     2, "-" } },
+		{ tokentype::T_INST_MULTIPLICATION,  { Instruction::mul,     2, "*" } },
+		{ tokentype::T_INST_DIVISION,        { Instruction::div,     2, "/" } },
+		{ tokentype::T_INST_DROP,            { Instruction::drop,    1, "drop" } },
+		{ tokentype::T_INST_IF,              { Instruction::if_func, 3, "if" } },
 	};
 	
 	/**
@@ -388,6 +390,39 @@ namespace model {
 	 */
 	Stack& Instruction::drop(Stack& stack) {
 		delete stack.pop();
+		return stack;
+	}
+
+	/**
+	 * if control instruction
+	 *
+	 * @param  Stack& stack which will be applicated
+	 * @return Stack&
+	 */
+	Stack& Instruction::if_func(Stack& stack) {
+		Element *true_stack, *false_stack, *bool_elem;
+		
+		bool_elem   = stack.pop();
+		false_stack = stack.pop();
+		true_stack  = stack.pop();
+
+		if (true_stack->instance_of<Stack>() && false_stack->instance_of<Stack>() && bool_elem->instance_of<Boolean>()) {
+			Stack tmp_stack;
+			Stack* exec_stack = (bool_elem->cast<Boolean>()->get_data() ? true_stack : false_stack)->cast<Stack>();
+
+			for (auto&& elem : *exec_stack) {
+				environment::elem_interpret(elem, tmp_stack);
+			}
+
+			if (tmp_stack.size() > 0) {
+				stack.push(tmp_stack.pop());
+			}
+		}
+
+		delete true_stack;
+		delete false_stack;
+		delete bool_elem;
+
 		return stack;
 	}
 

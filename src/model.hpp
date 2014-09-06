@@ -7,6 +7,7 @@
 #include <map>
 
 #include "tokentype.hpp"
+#include "model.hpp"
 
 namespace model {
 	/**
@@ -170,6 +171,7 @@ namespace model {
 			Boolean(const bool &_data) : data(_data) {};
 			virtual ~Boolean() {};
 			// Instance Methods
+			inline bool get_data() { return data; }
 			virtual std::string to_string() const;
 	};
 
@@ -231,6 +233,7 @@ namespace model {
 			static Stack& mul(Stack& stack);
 			static Stack& div(Stack& stack);
 			static Stack& drop(Stack& stack);
+			static Stack& if_func(Stack& stack);
 		public:
 			Instruction(const tokentype::Type _toktype) : toktype(_toktype) {}
 			virtual ~Instruction() {}

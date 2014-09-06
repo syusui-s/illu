@@ -34,5 +34,7 @@ namespace tokentype {
 		T_INST_DIVISION,
 		// - Basic Stack Operations
 		T_INST_DROP,
+		// - Control Operation
+		T_INST_IF,
 	} Type;
 } // namespace tokentype

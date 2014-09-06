@@ -66,6 +66,9 @@ namespace lexer {
 				"drop"		{ type = tokentype::T_INST_DROP; return true; }
 				"."			{ type = tokentype::T_INST_DROP; return true; }
 
+				// - Control Operations
+				"if"		{ type = tokentype::T_INST_IF; return true; }
+
 				// Singleton Objects
 				"nil"		{ type = tokentype::T_NIL; return true; }
 

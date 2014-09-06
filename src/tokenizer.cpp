@@ -43,6 +43,9 @@ namespace lexer {
 			// - Basic Stack Operations
 			case T_INST_DROP:
 				return new model::Instruction(tokentype::T_INST_DROP);
+			// - Control Operations
+			case T_INST_IF:
+				return new model::Instruction(tokentype::T_INST_IF);
 			default:
 				return NULL;
 		}

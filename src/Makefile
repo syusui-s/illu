@@ -1,5 +1,5 @@
 PROGRAM := illu
-OBJS := model.o scanner.o tokenizer.o main.o
+OBJS := model.o scanner.o tokenizer.o environment.o main.o
 
 CXX ?= clang++
 CXXFLAGS += -Wall -Werror -O2 -std=c++11

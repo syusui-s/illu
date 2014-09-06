@@ -10,27 +10,8 @@ extern "C" {
 #include "model.hpp"
 #include "scanner.hpp"
 #include "tokenizer.hpp"
+#include "environment.hpp"
 
-model::Stack& elem_interpret(model::Element* elem, model::Stack& stack) {
-	// Identifier
-	if (elem->instance_of<model::Identifier>()) {
-		std::cerr << "Identifier is not implemented." << std::endl;
-	// Instruction
-	} else if (elem->instance_of<model::Instruction>()) {
-		model::Instruction* inst = elem->cast<model::Instruction>();
-
-		if (stack.size() >= inst->num_of_args()) {
-			inst->applicate(stack);
-		} else {
-			std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;
-		}
-	// Data Objects
-	} else {
-		stack.push(elem);
-	}
-
-	return stack;
-}
 
 int main() {
 	// REPL
@@ -73,7 +54,7 @@ int main() {
 					} else if (loadstack.back() != loadstack.front()) {
 						loadstack.back()->push_back(elem);
 					} else {
-						elem_interpret(elem, *loadstack.back());
+						environment::elem_interpret(elem, *loadstack.back());
 					}
 			}
 		}
