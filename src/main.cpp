@@ -60,7 +60,13 @@ int main() {
 		}
 		delete p_tokenizer;
 
-		std::cout << "Data Stack: " << loadstack.front()->to_string() << std::endl;
+		std::cout << "Data Stack:"; // << loadstack.front()->to_string();
+		for (auto&& stack : loadstack) {
+			std::string stack_str = stack->to_string();
+
+			std::cout << stack_str.substr((loadstack.front() == stack) ? 1 : 0, stack_str.length() - 2);
+		}
+		std::cout << std::endl;
 	}
 
 	return 0;

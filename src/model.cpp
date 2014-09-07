@@ -410,7 +410,7 @@ namespace model {
 			Stack tmp_stack;
 			Stack* exec_stack = (bool_elem->cast<Boolean>()->get_data() ? true_stack : false_stack)->cast<Stack>();
 
-			for (auto&& elem : *exec_stack) {
+			for (auto elem : *exec_stack) {
 				environment::elem_interpret(elem, tmp_stack);
 			}
 
