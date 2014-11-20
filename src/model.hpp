@@ -159,7 +159,6 @@ namespace model {
 			virtual ~Boolean() {};
 			// Instance Methods
 			const bool data;
-			inline bool get_data() { return data; }
 			virtual std::string to_string() const;
 	};
 
@@ -176,7 +175,6 @@ namespace model {
 
 			// Instance Methods
 			virtual std::string to_string() const;
-			inline std::string get_data() { return data; }
 	};
 
 	/**
