@@ -11,7 +11,7 @@ namespace lexer {
 	 * @return std::string
 	 */
 	std::string Scanner::current_lexeme() {
-		if (token_first == NULL) throw "";
+		if (token_first == nullptr) throw "";
 		return input.substr(token_first - input_cstr, cursor - token_first);
 	}
 
@@ -45,11 +45,11 @@ namespace lexer {
 				FLOAT      = [+-]?[0-9]+"."[0-9]+;
 				STRING     = ["][^"\000\n]*["];
 				SYMBOL     = ":"IDENTIFIER;
-				NULL       = "\000";
+				nullptr       = "\000";
 
 				// Special Chars
 				" "			{ continue; }
-				NULL		{ --cursor; type = tokentype::T_EOF; return false; }
+				nullptr		{ --cursor; type = tokentype::T_EOF; return false; }
 
 				// Stack Expressions
 				"["			{ type = tokentype::T_STACK_START; return true; }

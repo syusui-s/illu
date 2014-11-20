@@ -33,7 +33,7 @@ namespace model {
 			 */
 			template<typename T>
 			inline T* cast() {
-				return this->instance_of<T>() ? static_cast<T*>(this) : NULL;
+				return this->instance_of<T>() ? static_cast<T*>(this) : nullptr;
 			}
 			virtual std::string to_string() const = 0;
 	};
@@ -138,7 +138,7 @@ namespace model {
 	/**
 	 * Nil data
 	 *
-	 * NULL data expression
+	 * null data expression
 	 */
 	class Nil : public Element {
 		public:

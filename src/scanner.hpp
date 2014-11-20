@@ -26,7 +26,7 @@ namespace lexer {
 				type(tokentype::T_UNDEFINED),
 				input_cstr(const_cast<char*>(_input.c_str())),
 				cursor(input_cstr),
-				token_first(NULL)
+				token_first(nullptr)
 				{}
 			~Scanner() { }
 			void reset();

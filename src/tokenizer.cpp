@@ -47,7 +47,7 @@ namespace lexer {
 			case T_INST_IF:
 				return std::make_shared<model::Instruction>(tokentype::T_INST_IF);
 			default:
-				return NULL;
+				return nullptr;
 		}
 
 	}

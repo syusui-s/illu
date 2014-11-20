@@ -46,7 +46,7 @@ int main() {
 					break;
 				default:
 					model::sp_Element elem = tok.to_element();
-					if (elem == NULL) {
+					if (elem == nullptr) {
 						// generally this error stops this program,
 						// but I'll keep it for debug until exception function is implemented.
 						std::cerr << "Unknown TokenType" << std::endl;

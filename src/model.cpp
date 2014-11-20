@@ -277,7 +277,7 @@ namespace model {
 		
 		arg2 = stack.pop();
 		arg1 = stack.pop();
-		result = NULL;
+		result = nullptr;
 
 		if (arg1->instance_of<Integer>()) {
 			result = arg1->cast<Integer>()->add(arg2);
@@ -308,7 +308,7 @@ namespace model {
 		
 		arg2 = stack.pop();
 		arg1 = stack.pop();
-		result = NULL;
+		result = nullptr;
 
 		if (arg1->instance_of<Integer>()) {
 			result = arg1->cast<Integer>()->sub(arg2);
@@ -332,7 +332,7 @@ namespace model {
 
 		arg2 = stack.pop();
 		arg1 = stack.pop();
-		result = NULL;
+		result = nullptr;
 
 		if (arg1->instance_of<Integer>()) {
 			result = arg1->cast<Integer>()->mul(arg2);
@@ -358,7 +358,7 @@ namespace model {
 		
 		arg2 = stack.pop();
 		arg1 = stack.pop();
-		result = NULL;
+		result = nullptr;
 
 		if (arg1->instance_of<Integer>()) {
 			result = arg1->cast<Integer>()->div(arg2);
