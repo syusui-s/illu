@@ -19,7 +19,7 @@ namespace lexer {
 
 			Token(const std::string &_lexeme, const tokentype::Type _type) :
 				lexeme(_lexeme), type(_type) {}
-			model::Element* to_element();
+			model::sp_Element to_element();
 	};
 
 	/**

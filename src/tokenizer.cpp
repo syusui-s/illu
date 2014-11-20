@@ -8,44 +8,44 @@ namespace lexer {
 	 *
 	 * @return Element*
 	 */
-	model::Element* Token::to_element()
+	model::sp_Element Token::to_element()
 	{
 		using namespace tokentype;
 
 		switch (this->type) {
 			// Data Types
 			case T_IDENTIFIER:
-				return new model::Identifier(lexeme);
+				return std::make_shared<model::Identifier>(lexeme);
 			case T_INTEGER:
-				return new model::Integer(lexeme, 10);
+				return std::make_shared<model::Integer>(lexeme, 10);
 			case T_FLOAT:
-				return new model::Float(lexeme);
+				return std::make_shared<model::Float>(lexeme);
 			case T_STRING:
-				return new model::String( lexeme.substr(1, lexeme.length() - 2 ) );
+				return std::make_shared<model::String>( lexeme.substr(1, lexeme.length() - 2 ) );
 			case T_NIL:
-				return new model::Nil();
+				return std::make_shared<model::Nil>();
 			case T_BOOLEAN_TRUE:
-				return new model::Boolean(true);
+				return std::make_shared<model::Boolean>(true);
 			case T_BOOLEAN_FALSE:
-				return new model::Boolean(false);
+				return std::make_shared<model::Boolean>(false);
 			case T_SYMBOL:
-				return new model::Symbol( lexeme.substr(1, lexeme.length() - 1 ) );
+				return std::make_shared<model::Symbol>( lexeme.substr(1, lexeme.length() - 1 ) );
 			// Instructions
 			// - Basic Arithmetic Operations
 			case T_INST_PLUS:
-				return new model::Instruction(tokentype::T_INST_PLUS);
+				return std::make_shared<model::Instruction>(tokentype::T_INST_PLUS);
 			case T_INST_MINUS:
-				return new model::Instruction(tokentype::T_INST_MINUS);
+				return std::make_shared<model::Instruction>(tokentype::T_INST_MINUS);
 			case T_INST_MULTIPLICATION:
-				return new model::Instruction(tokentype::T_INST_MULTIPLICATION);
+				return std::make_shared<model::Instruction>(tokentype::T_INST_MULTIPLICATION);
 			case T_INST_DIVISION:
-				return new model::Instruction(tokentype::T_INST_DIVISION);
+				return std::make_shared<model::Instruction>(tokentype::T_INST_DIVISION);
 			// - Basic Stack Operations
 			case T_INST_DROP:
-				return new model::Instruction(tokentype::T_INST_DROP);
+				return std::make_shared<model::Instruction>(tokentype::T_INST_DROP);
 			// - Control Operations
 			case T_INST_IF:
-				return new model::Instruction(tokentype::T_INST_IF);
+				return std::make_shared<model::Instruction>(tokentype::T_INST_IF);
 			default:
 				return NULL;
 		}

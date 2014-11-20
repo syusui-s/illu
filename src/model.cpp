@@ -3,7 +3,7 @@
 
 /**
  * namespace model
- * defined several Elements
+ * defined several sp_Elements
  */
 namespace model {
 	//////////////////////////
@@ -26,13 +26,13 @@ namespace model {
 	 *
 	 * @return std::string
 	 */
-	Element* Integer::add(Element *other) {
-		Element* rtn;
+	sp_Element Integer::add(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<Integer>()) {
-			rtn = new Integer( data + other->cast<Integer>()->get_data() );
+			rtn = std::make_shared<Integer>( data + other->cast<Integer>()->data );
 		} else if (other->instance_of<Float>()) {
-			rtn = new Float(static_cast<Float::TYPE>(data) + other->cast<Float>()->get_data() );
+			rtn = std::make_shared<Float>(static_cast<Float::TYPE>(data) + other->cast<Float>()->data );
 		// } else if (other.instance_of<>)
 		} else {
 			throw "UnexpectedTypeError";
@@ -46,13 +46,13 @@ namespace model {
 	 *
 	 * @return std::string
 	 */
-	Element* Integer::sub(Element *other) {
-		Element* rtn;
+	sp_Element Integer::sub(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<Integer>()) {
-			rtn = new Integer( data - other->cast<Integer>()->get_data() );
+			rtn = std::make_shared<Integer>( data - other->cast<Integer>()->data );
 		} else if (other->instance_of<Float>()) {
-			rtn = new Float(static_cast<Float::TYPE>(data) - other->cast<Float>()->get_data() );
+			rtn = std::make_shared<Float>(static_cast<Float::TYPE>(data) - other->cast<Float>()->data );
 		// } else if (other.instance_of<>) {
 		} else {
 			throw "UnexpectedTypeError";
@@ -64,13 +64,13 @@ namespace model {
 	/**
 	 * applicate mutliplication
 	 */
-	Element* Integer::mul(Element *other) {
-		Element* rtn;
+	sp_Element Integer::mul(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<Integer>()) {
-			rtn = new Integer( data * other->cast<Integer>()->get_data() );
+			rtn = std::make_shared<Integer>( data * other->cast<Integer>()->data );
 		} else if (other->instance_of<Float>()) {
-			rtn = new Float( data * other->cast<Float>()->get_data() );
+			rtn = std::make_shared<Float>( data * other->cast<Float>()->data );
 		// } else if (other.instance_of<>)
 		} else {
 			throw "UnexpectedTypeError";
@@ -82,13 +82,13 @@ namespace model {
 	/**
 	 * applicate division
 	 */
-	Element* Integer::div(Element *other) {
-		Element* rtn;
+	sp_Element Integer::div(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<Integer>()) {
-			rtn = new Integer( data / other->cast<Integer>()->get_data() );
+			rtn = std::make_shared<Integer>( data / other->cast<Integer>()->data );
 		} else if (other->instance_of<Float>()) {
-			rtn = new Float( data / other->cast<Float>()->get_data() );
+			rtn = std::make_shared<Float>( data / other->cast<Float>()->data );
 		// } else if (other.instance_of<>)
 		} else {
 			throw "UnexpectedTypeError";
@@ -112,13 +112,13 @@ namespace model {
 	/**
 	 * applicate addtion
 	 */
-	Element* Float::add(Element *other) {
-		Element* rtn;
+	sp_Element Float::add(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<Float>()) {
-			rtn = new Float( data + other->cast<Float>()->get_data() );
+			rtn = std::make_shared<Float>( data + other->cast<Float>()->data );
 		} else if (other->instance_of<Integer>()) {
-			rtn = new Float( data + other->cast<Integer>()->get_data() );
+			rtn = std::make_shared<Float>( data + other->cast<Integer>()->data );
 		// } else if (other.instance_of<>)
 		} else {
 			throw "UnexpectedTypeError";
@@ -130,13 +130,13 @@ namespace model {
 	/**
 	 * applicate subtruction
 	 */
-	Element* Float::sub(Element *other) {
-		Element* rtn;
+	sp_Element Float::sub(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<Float>()) {
-			rtn = new Float( data - other->cast<Float>()->get_data() );
+			rtn = std::make_shared<Float>( data - other->cast<Float>()->data );
 		} else if (other->instance_of<Integer>()) {
-			rtn = new Float( data - other->cast<Integer>()->get_data() );
+			rtn = std::make_shared<Float>( data - other->cast<Integer>()->data );
 		// } else if (other.instance_of<>)
 		} else {
 			throw "UnexpectedTypeError";
@@ -148,13 +148,13 @@ namespace model {
 	/**
 	 * applicate mutliplication
 	 */
-	Element* Float::mul(Element *other) {
-		Element* rtn;
+	sp_Element Float::mul(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<Float>()) {
-			rtn = new Float( data * other->cast<Float>()->get_data() );
+			rtn = std::make_shared<Float>( data * other->cast<Float>()->data );
 		} else if (other->instance_of<Integer>()) {
-			rtn = new Float( data * other->cast<Integer>()->get_data() );
+			rtn = std::make_shared<Float>( data * other->cast<Integer>()->data );
 		// } else if (other.instance_of<>)
 		} else {
 			throw "UnexpectedTypeError";
@@ -166,13 +166,13 @@ namespace model {
 	/**
 	 * applicate division
 	 */
-	Element* Float::div(Element *other) {
-		Element* rtn;
+	sp_Element Float::div(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<Float>()) {
-			rtn = new Float( data / other->cast<Float>()->get_data() );
+			rtn = std::make_shared<Float>( data / other->cast<Float>()->data );
 		} else if (other->instance_of<Integer>()) {
-			rtn = new Float( data / other->cast<Integer>()->get_data() );
+			rtn = std::make_shared<Float>( data / other->cast<Integer>()->data );
 		// } else if (other.instance_of<>)
 		} else {
 			throw "UnexpectedTypeError";
@@ -190,11 +190,11 @@ namespace model {
 	/**
 	 * Add this data and other data
 	 */
-	Element* String::add(Element *other) {
-		Element* rtn;
+	sp_Element String::add(const sp_Element& other) {
+		sp_Element rtn;
 
 		if (other->instance_of<String>()) {
-			rtn = new String( data + other->cast<String>()->get_data() );
+			rtn = std::make_shared<String>( data + other->cast<String>()->data );
 		} else {
 			throw "UnexpectedTypeError";
 		}
@@ -273,7 +273,7 @@ namespace model {
 	 * @return Stack&
 	 */
 	Stack& Instruction::add(Stack& stack) {
-		Element *arg1, *arg2, *result;
+		sp_Element arg1, arg2, result;
 		
 		arg2 = stack.pop();
 		arg1 = stack.pop();
@@ -286,18 +286,14 @@ namespace model {
 		} else if (arg1->instance_of<String>()) {
 			result = arg1->cast<String>()->add(arg2);
 		} else if (arg1->instance_of<Stack>()) {
+			// TODO: stack must be immutable
 			if (! arg2->instance_of<Stack>()) throw "UnexpectedTypeError";
 			*arg1->cast<Stack>() += *arg2->cast<Stack>();
 			stack.push(arg1);
-			delete arg2;
 			return stack;
 		}
 
 		stack.push(result);
-
-		delete arg1;
-		delete arg2;
-
 		return stack;
 	}
 
@@ -308,7 +304,7 @@ namespace model {
 	 * @return Stack&
 	 */
 	Stack& Instruction::sub(Stack& stack) {
-		Element *arg1, *arg2, *result;
+		sp_Element arg1, arg2, result;
 		
 		arg2 = stack.pop();
 		arg1 = stack.pop();
@@ -322,9 +318,6 @@ namespace model {
 
 		stack.push(result);
 
-		delete arg1;
-		delete arg2;
-
 		return stack;
 	}
 
@@ -335,8 +328,8 @@ namespace model {
 	 * @return Stack&
 	 */
 	Stack& Instruction::mul(Stack& stack) {
-		Element *arg1, *arg2, *result;
-		
+		sp_Element arg1, arg2, result;
+
 		arg2 = stack.pop();
 		arg1 = stack.pop();
 		result = NULL;
@@ -345,12 +338,11 @@ namespace model {
 			result = arg1->cast<Integer>()->mul(arg2);
 		} else if (arg1->instance_of<Float>()) {
 			result = arg1->cast<Float>()->mul(arg2);
+		} else {
+			throw "UnexpectedTypeError";
 		}
 
 		stack.push(result);
-
-		delete arg1;
-		delete arg2;
 
 		return stack;
 	}
@@ -362,7 +354,7 @@ namespace model {
 	 * @return Stack&
 	 */
 	Stack& Instruction::div(Stack& stack) {
-		Element *arg1, *arg2, *result;
+		sp_Element arg1, arg2, result;
 		
 		arg2 = stack.pop();
 		arg1 = stack.pop();
@@ -372,24 +364,24 @@ namespace model {
 			result = arg1->cast<Integer>()->div(arg2);
 		} else if (arg1->instance_of<Float>()) {
 			result = arg1->cast<Float>()->div(arg2);
+		} else {
+			throw "UnexpectedTypeError";
 		}
 
-		stack.push(result);
 
-		delete arg1;
-		delete arg2;
+		stack.push(result);
 
 		return stack;
 	}
 
 	/**
-	 * drop element
+	 * drop sp_Element
 	 *
 	 * @param  Stack& stack which will be applicated
 	 * @return Stack&
 	 */
 	Stack& Instruction::drop(Stack& stack) {
-		delete stack.pop();
+		stack.pop();
 		return stack;
 	}
 
@@ -400,28 +392,24 @@ namespace model {
 	 * @return Stack&
 	 */
 	Stack& Instruction::if_func(Stack& stack) {
-		Element *true_stack, *false_stack, *bool_elem;
-		
-		bool_elem   = stack.pop();
+		sp_Element true_stack, false_stack, bool_elem;
+
 		false_stack = stack.pop();
 		true_stack  = stack.pop();
+		bool_elem   = stack.pop();
 
 		if (true_stack->instance_of<Stack>() && false_stack->instance_of<Stack>() && bool_elem->instance_of<Boolean>()) {
-			Stack tmp_stack;
-			Stack* exec_stack = (bool_elem->cast<Boolean>()->get_data() ? true_stack : false_stack)->cast<Stack>();
+			Stack tmp_data_stack;
+			Stack* exec_stack = (bool_elem->cast<Boolean>()->data ? true_stack : false_stack)->cast<Stack>();
 
 			for (auto elem : *exec_stack) {
-				environment::elem_interpret(elem, tmp_stack);
+				environment::elem_interpret(elem, tmp_data_stack);
 			}
 
-			if (tmp_stack.size() > 0) {
-				stack.push(tmp_stack.pop());
+			if (tmp_data_stack.size() > 0) {
+				stack.push(tmp_data_stack.pop());
 			}
 		}
-
-		delete true_stack;
-		delete false_stack;
-		delete bool_elem;
 
 		return stack;
 	}
@@ -434,8 +422,7 @@ namespace model {
 	 *
 	 * @return std::string
 	 */
-	std::string Stack::to_string() const
-	{
+	std::string Stack::to_string() const {
 		std::string str("[ ");
 
 		for (auto iterator : *this) {
@@ -447,39 +434,36 @@ namespace model {
 	}
 
 	/**
-	 * Push Element
+	 * Push sp_Element
 	 *
-	 * @param Element* Address of Element which is pushed
+	 * @param sp_Element* Address of sp_Element which is pushed
 	 */
-	void Stack::push(Element* data)
-	{
+	void Stack::push(sp_Element data) {
 		this->push_back(data);
 		return;
 	}
 
 	/**
-	 * Drop Element
-	 * Pop and delete Element
+	 * Drop sp_Element
+	 * Pop and delete sp_Element
 	 */
-	void Stack::drop()
-	{
-		Element *data;
+	void Stack::drop() {
+		sp_Element data;
 
 		data = this->back();
-		delete data;
 		this->pop_back();
+
 		return;
 	}
 
 	/**
-	 * Pop and get Element
+	 * Pop and get sp_Element
 	 * Does not delete
 	 *
-	 * @return Element* Popped Element
+	 * @return sp_Element* Popped sp_Element
 	 */
-	Element* Stack::pop()
-	{
-		Element* rtn;
+	sp_Element Stack::pop() {
+		sp_Element rtn;
 
 		rtn = this->back();
 		this->pop_back();
@@ -490,8 +474,7 @@ namespace model {
 	/**
 	 * Free Unused Memory
 	 */
-	void Stack::free_memory()
-	{
+	void Stack::free_memory() {
 		Stack swp = *this;
 		this->swap(swp);
 
@@ -504,8 +487,7 @@ namespace model {
 	 * @param Stack& other
 	 * @return Stack&
 	 */
-	Stack& Stack::operator+=(Stack& other)
-	{
+	Stack& Stack::operator+=(Stack& other) {
 		this->insert(this->end(), other.begin(), other.end());
 
 		return *this;

@@ -10,11 +10,11 @@
 #include "model.hpp"
 
 namespace model {
+
 	/**
 	 * Abstract Class for All handlable data
 	 */
-	class Element
-	{
+	class Element {
 		public:
 			/**
 			 * destructor
@@ -38,16 +38,18 @@ namespace model {
 			virtual std::string to_string() const = 0;
 	};
 
+	// Alias to shared_ptr<Element>
+	using sp_Element = std::shared_ptr<Element>;
+
 	/**
 	 * Handle Stack of Element pointers
 	 */
-	class Stack : public std::list<Element*>, public Element
-	{
+	class Stack : public std::list<sp_Element>, public Element {
 		public:
 			virtual std::string to_string() const;
-			void push(Element*);
+			void push(sp_Element data);
 			void drop();
-			Element* pop();
+			sp_Element pop();
 			void free_memory();
 			Stack& operator+=(Stack&);
 	};
@@ -58,8 +60,7 @@ namespace model {
 	/**
 	 * Abstract Class for Numeric data
 	 */
-	class Numeric : public Element
-	{
+	class Numeric : public Element {
 		public:
 			virtual ~Numeric() {}
 	};
@@ -69,31 +70,25 @@ namespace model {
 	 * 
 	 * @see Numeric
 	 */
-	class Integer : public Numeric
-	{
+	class Integer : public Numeric {
 		public:
-			typedef int TYPE;
-		private:
-			TYPE data;
+			using TYPE = int;
 		public:
 			Integer(const TYPE _data) : data(_data) {}
 			Integer(const std::string _data, int base) :
 				data(std::stoi(_data, 0, base))
 			{}
 			virtual ~Integer() {}
+
 			// Instance Methods
-			
-			/**
-			 * get original data
-			 */
-			inline TYPE get_data() { return data; }
+			const TYPE data;
 			virtual std::string to_string() const;
 
 			// Operators
-			Element* add(Element *other);
-			Element* sub(Element *other);
-			Element* mul(Element *other);
-			Element* div(Element *other);
+			sp_Element add(const sp_Element& other);
+			sp_Element sub(const sp_Element& other);
+			sp_Element mul(const sp_Element& other);
+			sp_Element div(const sp_Element& other);
 	};
 
 	/**
@@ -101,11 +96,10 @@ namespace model {
 	 * 
 	 * @see Numeric
 	 */
-	class Float : public Numeric
-	{
-		public: typedef double TYPE;
+	class Float : public Numeric {
+		public:
+			using TYPE = double;
 		private:
-			TYPE data;
 		public:
 			Float(const TYPE _data) : data(_data) {}
 			Float(const std::string &_data) :
@@ -114,14 +108,14 @@ namespace model {
 			virtual ~Float() {}
 
 			// Instance Methods
-			inline TYPE get_data() { return data; }
+			const TYPE data;
 			virtual std::string to_string() const;
 
 			// Operators
-			Element* add(Element *other);
-			Element* sub(Element *other);
-			Element* mul(Element *other);
-			Element* div(Element *other);
+			sp_Element add(const sp_Element& other);
+			sp_Element sub(const sp_Element& other);
+			sp_Element mul(const sp_Element& other);
+			sp_Element div(const sp_Element& other);
 	};
 
 	/**
@@ -129,19 +123,16 @@ namespace model {
 	 *
 	 * representation of string data
 	 */
-	class String : public Element
-	{
-		private:
-			const std::string data;
+	class String : public Element {
 		public:
 			String(const std::string &_data) : data(_data) {}
 
 			// Instance Methods
+			const std::string data;
 			virtual std::string to_string() const;
-			inline std::string get_data() { return data; }
 
 			// Operators
-			Element* add(Element *other);
+			sp_Element add(const sp_Element& other);
 	};
 
 	/**
@@ -149,8 +140,7 @@ namespace model {
 	 *
 	 * NULL data expression
 	 */
-	class Nil : public Element
-	{
+	class Nil : public Element {
 		public:
 			Nil() {};
 			virtual ~Nil() {};
@@ -163,14 +153,12 @@ namespace model {
 	 *
 	 * True / False data
 	 */
-	class Boolean : public Element
-	{
-		private:
-			const bool data;
+	class Boolean : public Element {
 		public:
 			Boolean(const bool &_data) : data(_data) {};
 			virtual ~Boolean() {};
 			// Instance Methods
+			const bool data;
 			inline bool get_data() { return data; }
 			virtual std::string to_string() const;
 	};
@@ -181,11 +169,9 @@ namespace model {
 	 * Symbol represents a string that can be a IDENTIFIER
 	 * e.g. used in where interpreter register user defined function to function table
 	 */
-	class Symbol : public Element
-	{
-		private:
-			const std::string data;
+	class Symbol : public Element {
 		public:
+			const std::string data;
 			Symbol(const std::string &_data) : data(_data) {}
 
 			// Instance Methods
@@ -199,8 +185,7 @@ namespace model {
 	 * Identifier is a string data represents some data in the table
 	 * instance will be replaced with a tethered data
 	 */
-	class Identifier : public Element
-	{
+	class Identifier : public Element {
 		private:
 			const std::string data;
 		public:
@@ -213,13 +198,12 @@ namespace model {
 
 	//////////////////////////
 	// Instruction Classes
-	class Instruction : public Element
-	{
+	class Instruction : public Element {
 		private:
 			// Instruction
 			typedef struct {
 				model::Stack& (*pfunc)(model::Stack&); // Pointer to a static member function
-				size_t num_of_args;              // Number of Arguments
+				size_t num_of_args;                    // Number of Arguments
 				std::string string_expression;         // Human Readable Expression
 			} S_Instruction;
 

@@ -17,10 +17,10 @@ int main() {
 	// REPL
 	char* cstr_input;
 	std::string input;
-	std::list<model::Stack*> loadstack;
-	model::Stack* laststack;
+	std::list<std::shared_ptr<model::Stack>> loadstack;
+	std::shared_ptr<model::Stack> laststack = nullptr;
 
-	loadstack.push_back(new model::Stack);
+	loadstack.push_back(std::make_shared<model::Stack>());
 
 	editline::using_history();
 
@@ -33,19 +33,19 @@ int main() {
 
 		while (p_tokenizer->read_next()) {
 			lexer::Token tok = p_tokenizer->current_token();
-			model::Element* elem = tok.to_element();
 
 			switch (tok.type) {
 				// Stack
 				case tokentype::T_STACK_START:
-					loadstack.push_back(new model::Stack);
+					loadstack.push_back(std::make_shared<model::Stack>());
 					break;
 				case tokentype::T_STACK_END:
 					laststack = loadstack.back();
 					loadstack.pop_back();
-					loadstack.back()->push(laststack);
+					loadstack.back()->push(std::move(laststack));
 					break;
 				default:
+					model::sp_Element elem = tok.to_element();
 					if (elem == NULL) {
 						// generally this error stops this program,
 						// but I'll keep it for debug until exception function is implemented.

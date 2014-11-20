@@ -4,7 +4,7 @@ namespace environment {
 	/**
 	 * add/applicate element into/to stack
 	 */
-	model::Stack& elem_interpret(model::Element* elem, model::Stack& stack) {
+	model::Stack& elem_interpret(const model::sp_Element& elem, model::Stack& stack) {
 		// Identifier
 		if (elem->instance_of<model::Identifier>()) {
 			std::cerr << "Identifier is not implemented." << std::endl;
