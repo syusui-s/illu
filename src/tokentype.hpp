@@ -1,40 +1,40 @@
 #pragma once
 
-// namespace tokentype
-namespace tokentype {
+// namespace tokenizer
+namespace tokenizer {
 	/**
 	 * Definition of All Token-types
 	 */
-	typedef enum {
+	enum class TokenType : int {
 		// Special Tokens
-		T_UNDEFINED  = -1,
-		T_EOF        =  0,
+		UNDEFINED  = -1,
+		EOFTOK     =  0,
 
 		// Identifier
-		T_IDENTIFIER =  1,
+		IDENTIFIER =  1,
 
 		// Stack Expressions
-		T_STACK_START,
-		T_STACK_END,
+		STACK_START,
+		STACK_END,
 
 		// Data Types
-		T_INTEGER,
-		T_FLOAT,
-		T_STRING,
-		T_NIL,
-		T_BOOLEAN_TRUE,
-		T_BOOLEAN_FALSE,
-		T_SYMBOL,
+		INTEGER,
+		FLOAT,
+		STRING,
+		NIL,
+		BOOLEAN_TRUE,
+		BOOLEAN_FALSE,
+		SYMBOL,
 
 		// Instructions
 		// - Basic Arithmec Operations
-		T_INST_PLUS,
-		T_INST_MINUS,
-		T_INST_MULTIPLICATION,
-		T_INST_DIVISION,
+		INST_PLUS,
+		INST_MINUS,
+		INST_MULTIPLICATION,
+		INST_DIVISION,
 		// - Basic Stack Operations
-		T_INST_DROP,
+		INST_DROP,
 		// - Control Operation
-		T_INST_IF,
-	} Type;
-} // namespace tokentype
+		INST_IF,
+	};
+} // namespace tokenizer

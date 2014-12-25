@@ -232,13 +232,13 @@ namespace model {
 	/**
 	 * Functions map
 	 */
-	const std::map<tokentype::Type, Instruction::S_Instruction> Instruction::instructions = {
-		{ tokentype::T_INST_PLUS,            { Instruction::add,     2, "+" } },
-		{ tokentype::T_INST_MINUS,           { Instruction::sub,     2, "-" } },
-		{ tokentype::T_INST_MULTIPLICATION,  { Instruction::mul,     2, "*" } },
-		{ tokentype::T_INST_DIVISION,        { Instruction::div,     2, "/" } },
-		{ tokentype::T_INST_DROP,            { Instruction::drop,    1, "drop" } },
-		{ tokentype::T_INST_IF,              { Instruction::if_func, 3, "if" } },
+	const std::map<tokenizer::TokenType, Instruction::S_Instruction> Instruction::instructions = {
+		{ tokenizer::TokenType::INST_PLUS,            { Instruction::add,     2, "+" } },
+		{ tokenizer::TokenType::INST_MINUS,           { Instruction::sub,     2, "-" } },
+		{ tokenizer::TokenType::INST_MULTIPLICATION,  { Instruction::mul,     2, "*" } },
+		{ tokenizer::TokenType::INST_DIVISION,        { Instruction::div,     2, "/" } },
+		{ tokenizer::TokenType::INST_DROP,            { Instruction::drop,    1, "drop" } },
+		{ tokenizer::TokenType::INST_IF,              { Instruction::if_func, 3, "if" } },
 	};
 	
 	/**

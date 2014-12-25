@@ -36,10 +36,10 @@ int main() {
 
 			switch (tok.type) {
 				// Stack
-				case tokentype::T_STACK_START:
+				case tokenizer::TokenType::STACK_START:
 					loadstack.push_back(std::make_shared<model::Stack>());
 					break;
-				case tokentype::T_STACK_END:
+				case tokenizer::TokenType::STACK_END:
 					laststack = loadstack.back();
 					loadstack.pop_back();
 					loadstack.back()->push(std::move(laststack));

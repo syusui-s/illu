@@ -12,7 +12,7 @@ namespace lexer {
 	{
 		private:
 			std::string input;
-			tokentype::Type type;
+			tokenizer::TokenType type;
 			char *input_cstr;
 			char *marker;
 			char *cursor;
@@ -23,7 +23,7 @@ namespace lexer {
 			 */
 			Scanner(const std::string& _input) :
 				input(_input),
-				type(tokentype::T_UNDEFINED),
+				type(tokenizer::TokenType::UNDEFINED),
 				input_cstr(const_cast<char*>(_input.c_str())),
 				cursor(input_cstr),
 				token_first(nullptr)
@@ -32,7 +32,7 @@ namespace lexer {
 			void reset();
 			bool read_next();
 			std::string current_lexeme();
-			tokentype::Type current_tokentype() const;
+			tokenizer::TokenType current_tokentype() const;
 	};
 
 } // lexer

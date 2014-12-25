@@ -18,9 +18,9 @@ namespace lexer {
 	/**
 	 * Get current Token-type
 	 *
-	 * @return tokentype::Type
+	 * @return tokenizer::TokenType
 	 */
-	tokentype::Type Scanner::current_tokentype() const {
+	tokenizer::TokenType Scanner::current_tokentype() const {
 		return type;
 	}
 
@@ -49,44 +49,44 @@ namespace lexer {
 
 				// Special Chars
 				" "			{ continue; }
-				nullptr		{ --cursor; type = tokentype::T_EOF; return false; }
+				nullptr		{ --cursor; type = tokenizer::TokenType::EOFTOK; return false; }
 
 				// Stack Expressions
-				"["			{ type = tokentype::T_STACK_START; return true; }
-				"]"			{ type = tokentype::T_STACK_END;   return true; }
+				"["			{ type = tokenizer::TokenType::STACK_START; return true; }
+				"]"			{ type = tokenizer::TokenType::STACK_END;   return true; }
 
 				// Instructions
 				// - Basic Arithmetic Operations
-				"+"			{ type = tokentype::T_INST_PLUS; return true; }
-				"-"			{ type = tokentype::T_INST_MINUS; return true; }
-				"*"			{ type = tokentype::T_INST_MULTIPLICATION; return true; }
-				"/"			{ type = tokentype::T_INST_DIVISION; return true; }
+				"+"			{ type = tokenizer::TokenType::INST_PLUS; return true; }
+				"-"			{ type = tokenizer::TokenType::INST_MINUS; return true; }
+				"*"			{ type = tokenizer::TokenType::INST_MULTIPLICATION; return true; }
+				"/"			{ type = tokenizer::TokenType::INST_DIVISION; return true; }
 
 				// - Basic Stack Operations
-				"drop"		{ type = tokentype::T_INST_DROP; return true; }
-				"."			{ type = tokentype::T_INST_DROP; return true; }
+				"drop"		{ type = tokenizer::TokenType::INST_DROP; return true; }
+				"."			{ type = tokenizer::TokenType::INST_DROP; return true; }
 
 				// - Control Operations
-				"if"		{ type = tokentype::T_INST_IF; return true; }
+				"if"		{ type = tokenizer::TokenType::INST_IF; return true; }
 
 				// Singleton Objects
-				"nil"		{ type = tokentype::T_NIL; return true; }
+				"nil"		{ type = tokenizer::TokenType::NIL; return true; }
 
 				// Literal Expressions
-				STRING		{ type = tokentype::T_STRING; return true; }
-				INTEGER		{ type = tokentype::T_INTEGER; return true; }
-				FLOAT		{ type = tokentype::T_FLOAT; return true; }
-				SYMBOL		{ type = tokentype::T_SYMBOL; return true; }
+				STRING		{ type = tokenizer::TokenType::STRING; return true; }
+				INTEGER		{ type = tokenizer::TokenType::INTEGER; return true; }
+				FLOAT		{ type = tokenizer::TokenType::FLOAT; return true; }
+				SYMBOL		{ type = tokenizer::TokenType::SYMBOL; return true; }
 
 				// Boolean Expressions
-				"true"		{ type = tokentype::T_BOOLEAN_TRUE; return true; }
-				"false"		{ type = tokentype::T_BOOLEAN_FALSE; return true; }
+				"true"		{ type = tokenizer::TokenType::BOOLEAN_TRUE; return true; }
+				"false"		{ type = tokenizer::TokenType::BOOLEAN_FALSE; return true; }
 
 				// Identifier
-				IDENTIFIER	{ type = tokentype::T_IDENTIFIER; return true; }
+				IDENTIFIER	{ type = tokenizer::TokenType::IDENTIFIER; return true; }
 
 				// Undefined
-				[^]			{ type = tokentype::T_UNDEFINED; return true; }
+				[^]			{ type = tokenizer::TokenType::UNDEFINED; return true; }
 			 */
 		}
 	}

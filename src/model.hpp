@@ -206,8 +206,8 @@ namespace model {
 			} S_Instruction;
 
 			// Instructions Map
-			static const std::map<tokentype::Type, S_Instruction> instructions;
-			tokentype::Type toktype;
+			static const std::map<tokenizer::TokenType, S_Instruction> instructions;
+			tokenizer::TokenType toktype;
 
 			// Function
 			static Stack& add(Stack& stack);
@@ -217,7 +217,7 @@ namespace model {
 			static Stack& drop(Stack& stack);
 			static Stack& if_func(Stack& stack);
 		public:
-			Instruction(const tokentype::Type _toktype) : toktype(_toktype) {}
+			Instruction(const tokenizer::TokenType _toktype) : toktype(_toktype) {}
 			virtual ~Instruction() {}
 
 			std::string to_string() const;

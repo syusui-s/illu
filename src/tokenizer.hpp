@@ -15,9 +15,9 @@ namespace lexer {
 	{
 		public:
 			const std::string lexeme;
-			const tokentype::Type type;
+			const tokenizer::TokenType type;
 
-			Token(const std::string &_lexeme, const tokentype::Type _type) :
+			Token(const std::string &_lexeme, const tokenizer::TokenType _type) :
 				lexeme(_lexeme), type(_type) {}
 			model::sp_Element to_element();
 	};

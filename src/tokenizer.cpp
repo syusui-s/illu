@@ -10,42 +10,42 @@ namespace lexer {
 	 */
 	model::sp_Element Token::to_element()
 	{
-		using namespace tokentype;
+		using namespace tokenizer;
 
 		switch (this->type) {
 			// Data Types
-			case T_IDENTIFIER:
+			case TokenType::IDENTIFIER:
 				return std::make_shared<model::Identifier>(lexeme);
-			case T_INTEGER:
+			case TokenType::INTEGER:
 				return std::make_shared<model::Integer>(lexeme, 10);
-			case T_FLOAT:
+			case TokenType::FLOAT:
 				return std::make_shared<model::Float>(lexeme);
-			case T_STRING:
+			case TokenType::STRING:
 				return std::make_shared<model::String>( lexeme.substr(1, lexeme.length() - 2 ) );
-			case T_NIL:
+			case TokenType::NIL:
 				return std::make_shared<model::Nil>();
-			case T_BOOLEAN_TRUE:
+			case TokenType::BOOLEAN_TRUE:
 				return std::make_shared<model::Boolean>(true);
-			case T_BOOLEAN_FALSE:
+			case TokenType::BOOLEAN_FALSE:
 				return std::make_shared<model::Boolean>(false);
-			case T_SYMBOL:
+			case TokenType::SYMBOL:
 				return std::make_shared<model::Symbol>( lexeme.substr(1, lexeme.length() - 1 ) );
-			// Instructions
+			// INST_tructions
 			// - Basic Arithmetic Operations
-			case T_INST_PLUS:
-				return std::make_shared<model::Instruction>(tokentype::T_INST_PLUS);
-			case T_INST_MINUS:
-				return std::make_shared<model::Instruction>(tokentype::T_INST_MINUS);
-			case T_INST_MULTIPLICATION:
-				return std::make_shared<model::Instruction>(tokentype::T_INST_MULTIPLICATION);
-			case T_INST_DIVISION:
-				return std::make_shared<model::Instruction>(tokentype::T_INST_DIVISION);
+			case TokenType::INST_PLUS:
+				return std::make_shared<model::Instruction>(tokenizer::TokenType::INST_PLUS);
+			case TokenType::INST_MINUS:
+				return std::make_shared<model::Instruction>(tokenizer::TokenType::INST_MINUS);
+			case TokenType::INST_MULTIPLICATION:
+				return std::make_shared<model::Instruction>(tokenizer::TokenType::INST_MULTIPLICATION);
+			case TokenType::INST_DIVISION:
+				return std::make_shared<model::Instruction>(tokenizer::TokenType::INST_DIVISION);
 			// - Basic Stack Operations
-			case T_INST_DROP:
-				return std::make_shared<model::Instruction>(tokentype::T_INST_DROP);
+			case TokenType::INST_DROP:
+				return std::make_shared<model::Instruction>(tokenizer::TokenType::INST_DROP);
 			// - Control Operations
-			case T_INST_IF:
-				return std::make_shared<model::Instruction>(tokentype::T_INST_IF);
+			case TokenType::INST_IF:
+				return std::make_shared<model::Instruction>(tokenizer::TokenType::INST_IF);
 			default:
 				return nullptr;
 		}
