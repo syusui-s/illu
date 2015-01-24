@@ -24,4 +24,20 @@ namespace environment {
 
 		return stack;
 	}
-} // namespace envir
+
+	//////////////////////////
+	// NameSpace
+
+	bool NameSpace::add(const std::string name, model::sp_Element object) {
+		if (table.find(name) != table.end()) {
+			table[name] = object;
+			return true;
+		}
+
+		return false;
+	}
+
+	model::sp_Element NameSpace::get_elem(const std::string name) {
+		return table.at(name);
+	}
+} // namespace environment

@@ -34,6 +34,8 @@ namespace tokenizer {
 		INST_DIVISION,
 		// - Basic Stack Operations
 		INST_DROP,
+		// - Environment Operation
+		INST_BIND,
 		// - Control Operation
 		INST_IF,
 	};

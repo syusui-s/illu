@@ -66,6 +66,9 @@ namespace lexer {
 				"drop"		{ type = tokenizer::TokenType::INST_DROP; return true; }
 				"."			{ type = tokenizer::TokenType::INST_DROP; return true; }
 
+				// - Evrironment Operations
+				"="			{ type = tokenizer::TokenType::INST_BIND; return true; }
+
 				// - Control Operations
 				"if"		{ type = tokenizer::TokenType::INST_IF; return true; }
 

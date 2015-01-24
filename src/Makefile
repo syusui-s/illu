@@ -2,7 +2,7 @@ PROGRAM := illu
 OBJS := model.o scanner.o tokenizer.o environment.o main.o
 
 CXX ?= clang++
-CXXFLAGS += -Wall -Werror -O2 -std=c++11
+CXXFLAGS += -Wall -Werror -Wunreachable-code -O2 -std=c++11
 #INCLUDES := include/
 RE2C := re2c
 #LIBS := ""
