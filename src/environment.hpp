@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
 
 #include "model.hpp"
 
@@ -15,7 +16,8 @@ namespace environment {
 			NameSpace(){}
 			~NameSpace(){};
 
-			bool add(const std::string name, model::sp_Element object);
-			model::sp_Element get_elem(const std::string name);
+			bool add(const std::string& name, model::sp_Element object);
+			model::sp_Element get_elem(const std::string& name);
+			std::shared_ptr<NameSpace> get_ns(const std::string& name);
 	};
 } // namespace environment

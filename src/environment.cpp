@@ -28,7 +28,7 @@ namespace environment {
 	//////////////////////////
 	// NameSpace
 
-	bool NameSpace::add(const std::string name, model::sp_Element object) {
+	bool NameSpace::add(const std::string& name, model::sp_Element object) {
 		if (table.find(name) != table.end()) {
 			table[name] = object;
 			return true;
@@ -37,7 +37,13 @@ namespace environment {
 		return false;
 	}
 
-	model::sp_Element NameSpace::get_elem(const std::string name) {
-		return table.at(name);
+	model::sp_Element NameSpace::get_elem(const std::string& name) {
+		model::sp_Element& elem = this->table.at(name);
+		return (not elem->instance_of<NameSpace>()) ? elem : nullptr;
 	}
+
+	std::shared_ptr<NameSpace> NameSpace::get_ns(const std::string& name) {
+		return std::dynamic_pointer_cast<NameSpace>(this->table.at(name));
+	}
+
 } // namespace environment
