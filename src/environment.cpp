@@ -12,7 +12,7 @@ namespace environment {
 		} else if (elem->instance_of<model::Instruction>()) {
 			model::Instruction* inst = elem->cast<model::Instruction>();
 
-			if (stack.size() >= inst->num_of_args()) {
+			if (stack.size() >= inst->arity()) {
 				inst->applicate(stack);
 			} else {
 				std::cerr << "Cannot Applicate Instruction : too few arguments" << std::endl;

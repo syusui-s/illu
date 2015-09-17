@@ -255,8 +255,8 @@ namespace model {
 	 *
 	 * @return size_t Number of Arguments
 	 */
-	size_t Instruction::num_of_args() const {
-		return this->instructions.at(toktype).num_of_args;
+	size_t Instruction::arity() const {
+		return this->instructions.at(toktype).arity;
 	}
 
 	/**

@@ -201,7 +201,7 @@ namespace model {
 			// Instruction
 			typedef struct {
 				model::Stack& (*pfunc)(model::Stack&); // Pointer to a static member function
-				size_t num_of_args;                    // Number of Arguments
+				size_t arity;                          // Number of Arguments
 				std::string string_expression;         // Human Readable Expression
 			} S_Instruction;
 
@@ -222,6 +222,6 @@ namespace model {
 
 			std::string to_string() const;
 			Stack& applicate(Stack& stack);
-			size_t num_of_args() const;
+			size_t arity() const;
 	};
 }
