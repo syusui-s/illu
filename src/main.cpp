@@ -17,10 +17,7 @@ int main() {
 	// REPL
 	char* cstr_input;
 	std::string input;
-	std::list<std::shared_ptr<model::Stack>> loadstack;
-	std::shared_ptr<model::Stack> laststack = nullptr;
-
-	loadstack.push_back(std::make_shared<model::Stack>());
+	environment::GlobalObject global;
 
 	editline::using_history();
 
@@ -29,42 +26,13 @@ int main() {
 		editline::add_history(cstr_input);
 		input = cstr_input;
 
-		lexer::Tokenizer* p_tokenizer = new lexer::Tokenizer(input);
-
-		while (p_tokenizer->read_next()) {
-			lexer::Token tok = p_tokenizer->current_token();
-
-			switch (tok.type) {
-				// Stack
-				case tokenizer::TokenType::STACK_START:
-					loadstack.push_back(std::make_shared<model::Stack>());
-					break;
-				case tokenizer::TokenType::STACK_END:
-					laststack = loadstack.back();
-					loadstack.pop_back();
-					loadstack.back()->push(std::move(laststack));
-					break;
-				default:
-					model::sp_Element elem = tok.to_element();
-					if (elem == nullptr) {
-						// generally this error stops this program,
-						// but I'll keep it for debug until exception function is implemented.
-						std::cerr << "Unknown TokenType" << std::endl;
-						while (p_tokenizer->read_next()) {}
-					} else if (loadstack.back() != loadstack.front()) {
-						loadstack.back()->push_back(elem);
-					} else {
-						environment::elem_interpret(elem, *loadstack.back());
-					}
-			}
-		}
-		delete p_tokenizer;
+		global.evaluate(input);
 
 		std::cout << "Data Stack:"; // << loadstack.front()->to_string();
-		for (auto&& stack : loadstack) {
+		for (auto&& stack : global.loadstack) {
 			std::string stack_str = stack->to_string();
 
-			std::cout << stack_str.substr((loadstack.front() == stack) ? 1 : 0, stack_str.length() - 2);
+			std::cout << stack_str.substr((global.loadstack.front() == stack) ? 1 : 0, stack_str.length() - 2);
 		}
 		std::cout << std::endl;
 	}
